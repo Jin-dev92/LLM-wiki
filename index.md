@@ -21,6 +21,8 @@ tags: [index]
 ## sources
 - [[sources/building-effective-agents]] — Anthropic 실용 에이전트 구축 가이드 (web).
 - [[sources/andrew-ng-agentic-workflows-sequoia]] — Andrew Ng Sequoia 강연, 4패턴+실험 (youtube).
+- [[sources/claude-code-core-tools-guide]] — Claude Code 추천 도구 6종 설치 가이드 (local).
+- [[sources/claude-code-gstack-superpowers-guide]] — GStack+Superpowers 워크플로우 가이드 (local).
 
 ## rules
 - [[rules/company/git-pr]] — 팀 Git/PR + 공통 프로세스(문서위치·TDD·justfile) (company).
@@ -34,6 +36,13 @@ tags: [index]
 ## projects
 - [[projects/estate-server]] — NestJS+Prisma+Kafka 플랫폼 백엔드 (최신 컨벤션 기준).
 - [[projects/fanddle-server]] — Fanddle 플랫폼 백엔드 (Express+Sequelize 모노레포).
+
+## guide
+- [[guide/ai/claude-code-setup]] — Claude Code 환경 온보딩(플러그인·gstack 스킬·MCP·추천도구) + 동기화.
+- `guide/ai/claude-global.md` — 글로벌 `~/.claude/CLAUDE.md` 사본(원문 보관).
+- `guide/mcp/` — Serena · AWS MFA+MySQL MCP 설정 가이드(원문 보관).
+- `guide/aws/` — RDS 스냅샷 → 로컬 MySQL 복구 가이드(원문 보관).
+- `guide/github-actions/` — Claude PR 자동 리뷰 워크플로우 설정·요약(원문 보관).
 
 ## MOC
 - [[MOC/Home]] — 위키 진입점.
