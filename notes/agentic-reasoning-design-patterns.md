@@ -1,9 +1,11 @@
 ---
 type: note
 title: Agentic Reasoning 4가지 디자인 패턴 (Andrew Ng)
+summary: Andrew Ng의 4패턴 — Reflection·Tool use는 성숙(거의 항상 작동), Planning·Multi-agent는 이머징(강력하나 불안정).
 created: 2026-06-18
 updated: 2026-06-18
 visibility: private
+provenance: extracted
 tags: [llm, agent, agentic-reasoning, pattern, andrew-ng]
 ---
 

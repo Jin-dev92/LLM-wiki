@@ -1,9 +1,11 @@
 ---
 type: note
 title: Agentic Workflow 5가지 패턴
+summary: Anthropic이 정리한 재사용 가능한 5패턴(Prompt Chaining·Routing·Parallelization·Orchestrator-Workers·Evaluator-Optimizer). 단순한 것부터 조합이 안정적.
 created: 2026-06-18
 updated: 2026-06-18
 visibility: private
+provenance: extracted
 tags: [llm, agent, workflow, pattern]
 ---
 

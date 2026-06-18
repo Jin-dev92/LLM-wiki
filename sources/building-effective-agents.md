@@ -1,6 +1,7 @@
 ---
 type: source
 title: Building Effective Agents
+summary: Anthropic의 실용 에이전트 구축 가이드. 복잡한 프레임워크 대신 단순·조합 가능한 패턴을 권고하고 Workflow/Agent를 구분.
 created: 2026-06-18
 updated: 2026-06-18
 visibility: private

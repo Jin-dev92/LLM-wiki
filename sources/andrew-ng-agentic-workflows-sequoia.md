@@ -1,6 +1,7 @@
 ---
 type: source
 title: What's Next for AI Agentic Workflows — Andrew Ng at Sequoia AI Ascent
+summary: Andrew Ng의 14분 강연. 4가지 Agentic Reasoning 패턴 소개 + 실험으로 효과 입증(GPT-3.5+에이전트 루프가 GPT-4 제로샷 능가, HumanEval).
 created: 2026-06-18
 updated: 2026-06-18
 visibility: private

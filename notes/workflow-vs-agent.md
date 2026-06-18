@@ -1,9 +1,11 @@
 ---
 type: note
 title: Workflow vs Agent 구분
+summary: Workflow는 코드로 미리 정의한 흐름, Agent는 LLM이 도구·순서를 동적으로 결정. 복잡성과 예측가능성의 트레이드오프가 핵심.
 created: 2026-06-18
 updated: 2026-06-18
 visibility: private
+provenance: extracted
 tags: [llm, agent, workflow]
 ---
 
