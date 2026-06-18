@@ -33,6 +33,7 @@ tags: [index]
 
 ## projects
 - [[projects/estate-server]] — NestJS+Prisma+Kafka 플랫폼 백엔드 (최신 컨벤션 기준).
+- [[projects/fanddle-server]] — Fanddle 플랫폼 백엔드 (Express+Sequelize 모노레포).
 
 ## MOC
 - [[MOC/Home]] — 위키 진입점.
