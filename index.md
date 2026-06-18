@@ -22,5 +22,11 @@ tags: [index]
 - [[sources/building-effective-agents]] — Anthropic 실용 에이전트 구축 가이드 (web).
 - [[sources/andrew-ng-agentic-workflows-sequoia]] — Andrew Ng Sequoia 강연, 4패턴+실험 (youtube).
 
+## rules
+- [[rules/stacks/react]] — React 함수형 컴포넌트 베이스 룰 (stack).
+- [[rules/stacks/frontend]] — React Query+Zustand+TS FE 개발 규칙 (stack).
+- [[rules/stacks/nestjs-test]] — NestJS 테스트 코드 규칙 (stack).
+- [[rules/team/backend-dev-rules]] — 팀 Git/PR + Java/Spring 백엔드 규칙 (team).
+
 ## MOC
 - [[MOC/Home]] — 위키 진입점.
