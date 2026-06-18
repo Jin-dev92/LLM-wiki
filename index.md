@@ -25,10 +25,14 @@ tags: [index]
 ## rules
 - [[rules/company/git-pr]] — 팀 Git/PR + 공통 프로세스(문서위치·TDD·justfile) (company).
 - [[rules/stacks/java]] — Java/Spring 백엔드 규칙(QueryDSL·DTO·DDD·Liquibase 등) (stack).
-- [[rules/stacks/nestjs]] — NestJS 일반 규칙(모듈·검증·트랜잭션) (stack).
+- [[rules/stacks/nestjs]] — NestJS 일반 규칙(모듈·검증·설정키·트랜잭션, Prisma 기준) (stack).
+- [[rules/stacks/prisma]] — Prisma DB 규칙(cuid·논리삭제·마이그레이션) (stack).
 - [[rules/stacks/nestjs-test]] — NestJS 테스트 코드 규칙 (stack).
 - [[rules/stacks/frontend]] — React Query+Zustand+TS FE 개발 규칙 (stack).
 - [[rules/stacks/react]] — React 함수형 컴포넌트 베이스 룰 (stack).
+
+## projects
+- [[projects/estate-server]] — NestJS+Prisma+Kafka 플랫폼 백엔드 (최신 컨벤션 기준).
 
 ## MOC
 - [[MOC/Home]] — 위키 진입점.
