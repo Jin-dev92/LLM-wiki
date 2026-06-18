@@ -23,10 +23,12 @@ tags: [index]
 - [[sources/andrew-ng-agentic-workflows-sequoia]] — Andrew Ng Sequoia 강연, 4패턴+실험 (youtube).
 
 ## rules
-- [[rules/stacks/react]] — React 함수형 컴포넌트 베이스 룰 (stack).
-- [[rules/stacks/frontend]] — React Query+Zustand+TS FE 개발 규칙 (stack).
+- [[rules/company/git-pr]] — 팀 Git/PR + 공통 프로세스(문서위치·TDD·justfile) (company).
+- [[rules/stacks/java]] — Java/Spring 백엔드 규칙(QueryDSL·DTO·DDD·Liquibase 등) (stack).
+- [[rules/stacks/nestjs]] — NestJS 일반 규칙(모듈·검증·트랜잭션) (stack).
 - [[rules/stacks/nestjs-test]] — NestJS 테스트 코드 규칙 (stack).
-- [[rules/team/backend-dev-rules]] — 팀 Git/PR + Java/Spring 백엔드 규칙 (team).
+- [[rules/stacks/frontend]] — React Query+Zustand+TS FE 개발 규칙 (stack).
+- [[rules/stacks/react]] — React 함수형 컴포넌트 베이스 룰 (stack).
 
 ## MOC
 - [[MOC/Home]] — 위키 진입점.

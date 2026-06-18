@@ -344,3 +344,42 @@ const enum OrderStatus { PENDING = 'PENDING' }
 
 - `/add-api-domain {도메인명}` — API 레이어 4파일 보일러플레이트 자동 생성
 - `/ts-type-check [파일경로]` — TypeScript 타입 규칙 위반 검사
+
+---
+
+## (팀 모노레포 룰에서 통합) 추가 FE 규칙
+<!-- from iCloud/claude/docs/team-java-rules.md § Frontend Rules — fe-rules.md에 없던 항목만 -->
+
+### Boolean 비교 — strict equality
+
+```js
+// ✅ GOOD
+area?.use_xxx_yn === true
+
+// ❌ BAD (FORBIDDEN) — BE는 boolean → true/false 직렬화
+area?.use_xxx_yn === "1"
+area?.use_xxx_yn === 1
+```
+
+### useEffect deps — 객체 전체 포함 금지
+
+```js
+// ❌ BAD — 참조 변경마다 재실행 → 무한 루프 위험
+useEffect(() => { ... }, [fetchedCustomer, customer]);
+
+// ✅ GOOD — 원시값(id)만 사용
+// eslint-disable-next-line react-hooks/exhaustive-deps
+useEffect(() => { ... }, [fetchedCustomer?.id, customer?.id]);
+```
+
+### API 응답 필드 타입 가드
+
+API 응답 필드는 `number | string` 가능 → `.trim()` 직접 호출 금지.
+
+```js
+// ❌ BAD
+field.trim()
+
+// ✅ GOOD
+String(field ?? "").trim()
+```
