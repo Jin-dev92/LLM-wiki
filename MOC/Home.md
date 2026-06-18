@@ -1,6 +1,7 @@
 ---
 type: moc
 title: Home
+summary: 위키 진입점. 주제 MOC와 최근 노트를 모으는 허브.
 created: 2026-06-18
 updated: 2026-06-18
 visibility: private
