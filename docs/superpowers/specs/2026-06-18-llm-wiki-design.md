@@ -36,8 +36,11 @@
 - 추가 용도: 회사 공통 팀룰 / 재사용 CLAUDE.md 관리 (기존 iCloud 관리 대체)
 - 프론트엔드: **Obsidian** (`[[위키링크]]` + 그래프 뷰 + frontmatter)
 - 입력 소스: 유튜브 영상, 웹 링크(기술글/문서), 로컬 파일(PDF/문서), 대화/메모 직접
-- 동기화: **Git private 레포** (버전이력·되돌리기·팀 공유 PR)
-- rules 배포: **커맨드로 조합·복사** (`/wiki-apply`)
+- 동기화: **개인 Git private 레포** (나만 접근, 모든 노트가 버전이력·기기간 동기화·백업 대상)
+- 프라이버시/공유: **모델 ① — 개인레포 + export 공유.** "동기화"와 "공유"를 분리.
+  vault 전체를 팀과 공유하지 않는다. frontmatter `visibility`(기본 `private`)로 표시된
+  것만 커맨드로 export. 안전 기본값(기본은 비공개).
+- rules 배포: **커맨드로 조합·복사** (`/wiki-apply`), 팀 공유는 export (`/wiki-publish`)
 
 ## 아키텍처
 
@@ -88,10 +91,13 @@ type: note | source | project | rule | moc
 title: ...
 created: 2026-06-18
 updated: 2026-06-18
+visibility: private   # private(기본) | team | public
 tags: [ai, llm]
 ---
 ```
 
+- `visibility`: 기본 `private`. export(`/wiki-publish`) 대상은 `team`/`public` 뿐.
+  명시 안 하면 private로 간주 (안전 기본값).
 - `source` 추가 필드: `url`, `author`, `ingested_via: youtube|web|pdf|memo`
 - `rule` 추가 필드: `scope: company|team|stack`, `applies_to: [react, supabase]`
 - 본문은 `[[링크]]`로 다른 노트 연결
@@ -110,8 +116,13 @@ tags: [ai, llm]
 - **`/wiki-apply <대상 프로젝트 경로>`**
   - `rules/`에서 필요한 조각(회사+팀+스택) 골라 조합
   - 대상 프로젝트 `CLAUDE.md`로 복사 (어떤 조각 쓸지 대화로 확인)
+- **`/wiki-publish <대상 위치>`**
+  - `visibility: team|public` 인 파일만 골라 팀 레포/공유 위치로 export.
+  - **유출 방지 검사**: export 대상이 `[[링크]]`로 `private` 노트를 참조하면 경고하고
+    중단 (깨진 링크·정보 유출 방지). 사람이 해소하도록 보고.
 - **`/wiki-review`**
   - 고아 노트(링크 없는 것), 연결 누락, 오래된 노트 탐지 → 링크/정리 제안 (영상의 "최신화")
+  - `visibility` 누락 노트도 함께 보고 (기본 private로 동작하나 명시 권장)
 
 ## COMPILE 규칙 (CLAUDE.md 핵심 원칙)
 
@@ -121,6 +132,8 @@ tags: [ai, llm]
 3. **연결 우선**: 새 노트는 기존 노트 최소 1개와 연결 시도 (복리 효과).
 4. **사람 검토**: 추측으로 단정하지 않고, 불확실하면 검토 플래그.
 5. **민감정보**: `rules/`에 키·비밀·고객정보 금지. private repo라도 평문 노출 경고.
+6. **안전 기본값(비공개)**: 새 노트는 `visibility: private` 가 기본. 공유는 export로만
+   일어나는 명시적 행동. 동기화(git)와 공유(export)는 분리한다.
 
 ## 검증 기준 (성공 조건)
 
