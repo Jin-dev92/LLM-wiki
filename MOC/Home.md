@@ -12,3 +12,7 @@ tags: [home]
 
 ## MOC 목록
 - [[]]
+
+## 최근 추가 노트
+- [[workflow-vs-agent]] — LLM Workflow와 Agent의 차이
+- [[agentic-workflow-patterns]] — 5가지 Agentic Workflow 패턴
