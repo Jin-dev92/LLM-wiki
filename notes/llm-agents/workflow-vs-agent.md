@@ -20,4 +20,4 @@ Workflow는 코드로 미리 정의한 흐름에 따라 LLM을 호출하는 방�
 
 ## 관련
 - [[agentic-workflow-patterns]]
-- 출처: [[sources/building-effective-agents]]
+- 출처: [[sources/llm-agents/building-effective-agents]]

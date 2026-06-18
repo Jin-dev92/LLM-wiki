@@ -26,4 +26,4 @@ Andrew Ng이 Sequoia AI Ascent에서 제시한 분류:
 ## 관련
 - [[workflow-vs-agent]] — 에이전트와 워크플로의 근본 차이
 - [[agentic-workflow-patterns]] — Anthropic의 5가지 워크플로 패턴 분류(유사 개념)
-- 출처: [[sources/andrew-ng-agentic-workflows-sequoia]]
+- 출처: [[sources/llm-agents/andrew-ng-agentic-workflows-sequoia]]

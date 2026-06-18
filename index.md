@@ -19,10 +19,10 @@ tags: [index]
 - [[agentic-reasoning-design-patterns]] — Andrew Ng의 4패턴(Reflection·Tool use·Planning·Multi-agent).
 
 ## sources
-- [[sources/building-effective-agents]] — Anthropic 실용 에이전트 구축 가이드 (web).
-- [[sources/andrew-ng-agentic-workflows-sequoia]] — Andrew Ng Sequoia 강연, 4패턴+실험 (youtube).
-- [[sources/claude-code-core-tools-guide]] — Claude Code 추천 도구 6종 설치 가이드 (local).
-- [[sources/claude-code-gstack-superpowers-guide]] — GStack+Superpowers 워크플로우 가이드 (local).
+- [[sources/llm-agents/building-effective-agents]] — Anthropic 실용 에이전트 구축 가이드 (web).
+- [[sources/llm-agents/andrew-ng-agentic-workflows-sequoia]] — Andrew Ng Sequoia 강연, 4패턴+실험 (youtube).
+- [[sources/claude-code/claude-code-core-tools-guide]] — Claude Code 추천 도구 6종 설치 가이드 (local).
+- [[sources/claude-code/claude-code-gstack-superpowers-guide]] — GStack+Superpowers 워크플로우 가이드 (local).
 
 ## rules
 - [[rules/company/git-pr]] — 팀 Git/PR + 공통 프로세스(문서위치·TDD·justfile) (company).
