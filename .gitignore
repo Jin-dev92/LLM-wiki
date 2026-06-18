@@ -1,0 +1,8 @@
+# OS
+.DS_Store
+
+# Obsidian (휘발성 작업 상태만 제외, 설정은 추적)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.trash/

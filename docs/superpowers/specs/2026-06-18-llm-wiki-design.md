@@ -63,7 +63,9 @@
 ```
 llm-wiki/
 ├── CLAUDE.md              # COMPILE 규칙 (Claude가 따르는 위키화 지침)
-├── .claude/commands/      # /ingest, /wiki-apply, /wiki-review
+├── index.md               # 마스터 카탈로그 (모든 페이지 + summary)
+├── .claude/commands/      # /ingest, /wiki-apply, /wiki-publish, /wiki-review
+├── templates/             # 타입별 frontmatter 템플릿
 ├── MOC/                   # 주제별 목차 허브 (예: AI.md, 개발.md)
 ├── notes/                 # 영구 지식 (개념 1개=1파일, 내 언어로 재정리)
 ├── sources/               # 원천 기록 (영상/글/PDF 요약 + 출처 메타)
@@ -89,6 +91,7 @@ llm-wiki/
 ---
 type: note | source | project | rule | moc
 title: ...
+summary: 1~2문장 미리보기   # 계층 검색용
 created: 2026-06-18
 updated: 2026-06-18
 visibility: private   # private(기본) | team | public
@@ -96,20 +99,27 @@ tags: [ai, llm]
 ---
 ```
 
+- `summary`: 1~2문장 미리보기. 제목/태그/summary를 먼저 읽고 본문은 필요할 때만 여는
+  **계층 검색**으로 위키가 커져도 컨텍스트 비용을 평탄하게 유지.
 - `visibility`: 기본 `private`. export(`/wiki-publish`) 대상은 `team`/`public` 뿐.
   명시 안 하면 private로 간주 (안전 기본값).
+- `note` 추가 필드: `provenance: extracted|inferred|ambiguous` — 출처 추출/LLM 추론/모호
+  를 구분해 환각 방지·사람 검토를 데이터로 강제.
 - `source` 추가 필드: `url`, `author`, `ingested_via: youtube|web|pdf|memo`
 - `rule` 추가 필드: `scope: company|team|stack`, `applies_to: [react, supabase]`
 - 본문은 `[[링크]]`로 다른 노트 연결
+- 루트 `index.md` = 마스터 카탈로그(모든 페이지 + summary). `/ingest` 시 자동 갱신.
 
 ## 슬래시 커맨드 (워크플로)
 
 - **`/ingest <url | 파일경로 | 유튜브링크>`**
   - 소스 종류 자동 판별 → 유튜브면 watch, 웹이면 fetch, 로컬이면 read
-  - `sources/`에 원천 기록 생성 (출처 메타 포함)
-  - `notes/`에 atomic 영구노트 추출 (내 언어로 재구성)
-  - 기존 노트 검색해 `[[링크]]` 연결
-  - 관련 `MOC/` 갱신
+  - **계층 검색**: `index.md` + 제목/태그/summary 먼저 훑어 후보 좁힘
+  - `sources/`에 원천 기록 생성 (출처 메타 + summary)
+  - `notes/`에 atomic 영구노트 추출 (내 언어로 재구성, provenance 표시)
+  - **merge-on-ingest**: 같은 개념 노트가 있으면 새로 만들지 말고 병합·출처 누적
+  - 기존 노트 검색해 `[[링크]]` 연결, 관련 `MOC/` 갱신
+  - `index.md` 갱신
   - 검토 필요 항목 보고
   - **대화/메모 직접 입력**: 별도 인자 없이, 대화 중 "이거 위키에 저장해" 또는 붙여넣은
     메모를 `/ingest` 가 받아 동일한 COMPILE 단계(③~⑤)를 수행 (`ingested_via: memo`).
@@ -121,7 +131,8 @@ tags: [ai, llm]
   - **유출 방지 검사**: export 대상이 `[[링크]]`로 `private` 노트를 참조하면 경고하고
     중단 (깨진 링크·정보 유출 방지). 사람이 해소하도록 보고.
 - **`/wiki-review`**
-  - 고아 노트(링크 없는 것), 연결 누락, 오래된 노트 탐지 → 링크/정리 제안 (영상의 "최신화")
+  - 고아 노트, 연결 누락, **dead-link(깨진 `[[링크]]`)**, **모순 주장(`[!contradiction]` 플래그)**,
+    `index.md` 정합성, 오래된 노트 탐지 → 정리 제안 (영상의 "최신화")
   - `visibility` 누락 노트도 함께 보고 (기본 private로 동작하나 명시 권장)
 
 ## COMPILE 규칙 (CLAUDE.md 핵심 원칙)
@@ -130,10 +141,30 @@ tags: [ai, llm]
    베껴쓰지 않고 내 언어로 재구성.
 2. **원자성**: 노트 1개 = 개념 1개. 길어지면 쪼개고 링크.
 3. **연결 우선**: 새 노트는 기존 노트 최소 1개와 연결 시도 (복리 효과).
-4. **사람 검토**: 추측으로 단정하지 않고, 불확실하면 검토 플래그.
-5. **민감정보**: `rules/`에 키·비밀·고객정보 금지. private repo라도 평문 노출 경고.
-6. **안전 기본값(비공개)**: 새 노트는 `visibility: private` 가 기본. 공유는 export로만
+4. **중복 대신 병합**: 같은 개념은 새 파일 말고 기존 노트에 병합 (merge-on-ingest).
+5. **계층 검색**: 항상 제목/태그/summary 먼저, 본문은 필요할 때만.
+6. **출처 정직성**: 추출(extracted)과 추론(inferred)을 `provenance`로 구분.
+7. **사람 검토**: 추측으로 단정하지 않고, 불확실하면 검토 플래그.
+8. **민감정보**: `rules/`에 키·비밀·고객정보 금지. private repo라도 평문 노출 경고.
+9. **안전 기본값(비공개)**: 새 노트는 `visibility: private` 가 기본. 공유는 export로만
    일어나는 명시적 행동. 동기화(git)와 공유(export)는 분리한다.
+
+## 채택한 외부 기법 (2026-06-18 조사)
+
+기존 오픈소스 구현 검토 후, 우리 범위(개인용·마크다운 only·RAG 없음)에 맞는 것만 채택:
+
+- **provenance frontmatter** (extracted|inferred|ambiguous) — 환각 방지·사람 검토 강화.
+  출처: [obsidian-wiki](https://github.com/ar9av/obsidian-wiki)
+- **summary + 계층 검색** — 위키 확장성. 출처: [obsidian-wiki](https://github.com/ar9av/obsidian-wiki)
+- **index.md 마스터 카탈로그 + 생성 전 중복 검사** —
+  출처: [claude-obsidian](https://github.com/AgriciDaniel/claude-obsidian)
+- **merge-on-ingest** (중복 대신 병합) — 출처: [obsidian-wiki](https://github.com/ar9av/obsidian-wiki)
+- **/wiki-review 확장**: dead-link + `[!contradiction]` 플래그 —
+  출처: [claude-obsidian](https://github.com/AgriciDaniel/claude-obsidian)
+
+보류(범위 확대): `.manifest.json` 델타 추적, `/autoresearch`, 인용 기반 `/query`.
+거부(스펙 상충/단일 사용자): 하이브리드 검색(BM25+임베딩), 멀티라이터 락, 방법론 모드 라우터.
+패턴 출처: Andrej Karpathy "LLM Wiki".
 
 ## 검증 기준 (성공 조건)
 
