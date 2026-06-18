@@ -9,23 +9,38 @@
   "colorGroups": [
     {
       "query": "path:notes/",
-      "color": { "a": 1, "rgb": 5017087 }
+      "color": {
+        "a": 1,
+        "rgb": 5017087
+      }
     },
     {
       "query": "path:sources/",
-      "color": { "a": 1, "rgb": 4437377 }
+      "color": {
+        "a": 1,
+        "rgb": 4437377
+      }
     },
     {
       "query": "path:rules/",
-      "color": { "a": 1, "rgb": 16098851 }
+      "color": {
+        "a": 1,
+        "rgb": 16098851
+      }
     },
     {
       "query": "path:projects/",
-      "color": { "a": 1, "rgb": 11032055 }
+      "color": {
+        "a": 1,
+        "rgb": 11032055
+      }
     },
     {
       "query": "path:MOC/ OR path:index.md",
-      "color": { "a": 1, "rgb": 16044095 }
+      "color": {
+        "a": 1,
+        "rgb": 16044095
+      }
     }
   ],
   "collapse-display": true,
@@ -38,6 +53,6 @@
   "repelStrength": 10,
   "linkStrength": 1,
   "linkDistance": 250,
-  "scale": 1,
-  "close": false
+  "scale": 1.5152822660188672,
+  "close": true
 }

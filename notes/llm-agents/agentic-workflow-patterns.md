@@ -21,4 +21,4 @@ LLM 기반 시스템에는 재사용 가능한 5가지 워크플로 패턴이 �
 
 ## 관련
 - [[workflow-vs-agent]]
-- 출처: [[sources/building-effective-agents]]
+- 출처: [[sources/llm-agents/building-effective-agents]]

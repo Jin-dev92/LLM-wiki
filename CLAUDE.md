@@ -6,6 +6,7 @@
 ## 폴더 역할
 - `MOC/` 주제 목차 허브 / `notes/` 영구 지식(atomic) / `sources/` 원천 기록
 - `projects/` 작업 로그 / `rules/` 배포용 운영 산출물 / `inbox/` 미분류
+- `guide/` 환경 재현·온보딩 참조 문서(글로벌 설정 사본, Claude Code 셋업 등). 작업 로그가 아니라 "복원용 가이드".
 - `index.md` 루트의 마스터 카탈로그(모든 페이지 목록 + summary). 노트 생성/병합 시 갱신.
 - 새 파일은 `templates/`의 해당 타입 frontmatter를 따른다.
 
