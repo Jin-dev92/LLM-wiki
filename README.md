@@ -24,6 +24,10 @@ Claude Code = 위키를 빌드/정리하는 엔진.
 - `/wiki-apply <프로젝트 경로>` — rules 조합해 대상 CLAUDE.md 생성
 - `/wiki-publish <대상>` — visibility:team|public 만 export (유출 검사 포함)
 
+## Obsidian 그래프
+`.obsidian/graph.json`에 폴더별 색상 그룹이 정의돼 있어 vault를 열면 그래프에서 종류가 색으로 구분된다:
+notes=파랑 · sources=초록 · rules=주황 · projects=보라 · MOC/index=노랑.
+
 ## 프라이버시
 - 모든 노트는 frontmatter `visibility`(기본 `private`).
 - 동기화(git, 개인 private 레포)와 공유(export)는 분리. 기본은 비공개.
