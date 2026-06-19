@@ -25,23 +25,24 @@ tags: [resume, profile, career, fullstack]
 5년간 스타트업·프리랜서를 거치며 백엔드부터 AWS 인프라까지 직접 책임진 풀스택 개발자입니다.
 **느린 건 빠르게, 없는 건 만들고, 반복되는 건 자동화**하는 방식으로 일합니다.
 
-**대표 성과 (3줄 요약)**
+**대표 성과**
 - **성능 최적화**: 글로벌 API 응답 1.2초 → 0.08초(93%↓), CRM 핵심 API 15초 → 2초(87%↓) — 병렬 처리·캐싱·CDN·다중 리전으로 병목 제거
-- **자동화 파이프라인**: Claude Code + MCP(Sentry·Notion) 연동으로 **이슈 인지 → Fix → PR 작성**까지 PR 리뷰 파이프라인 구축
+- **AI/LLM 프로덕션 적용**: Gemini 기반 전자 차트 요약 자동화·시술 추천 AI 서버 1인 구축 — 민감정보 마스킹 프롬프트 파이프라인 + 사내 지식 위키를 근거로 답하게 해 잘못된 답변·비용 절감
+- **자동화 파이프라인**: Claude Code + MCP(Sentry·Notion) 연동으로 **이슈 인지 → Fix → PR 작성**까지 PR 리뷰 파이프라인 구축, Codex, Notion 을 이용한 코드 검증 파이프라인 구축
 - **기존 서비스 단독 운영·개선(풀스택)**: 구독형 EV 서비스 1인 담당, Spring Boot → Django 마이그레이션으로 서버 지연 80%↓
 
 ### 기술 스택
-- Backend: NestJS, Node.js, TypeScript, Spring Boot, Java, ExpressJS, Python, Django, JPA, ORM
-- Frontend: React, Next.js, JavaScript, HTML/CSS, Tailwind, styled-components, Lua
+- Backend: NestJS, Node.js, ExpressJS, TypeScript, Spring Boot, Java, Python, Django, Lua, JPA, TypeORM, Prisma
+- Frontend: React, Next.js, JavaScript, HTML/CSS, Tailwind, styled-components
 - Database: PostgreSQL, MySQL, MongoDB, Redis, Aurora DB, SQL
 - Infra: AWS (ECS, ECR, RDS, CloudFront, Lambda), Docker, CI/CD (GitHub Actions, CodePipeline)
 - Test: Jest, JUnit, Mockito
 - Tool: Jira, Notion, Slack, Git, IntelliJ
-- AI: Claude Code, Gemini, GitHub Copilot
+- AI: Claude Code, Gemini, GitHub Copilot, Codex
 - APM: Sentry, AWS CloudWatch
 
 **주력 기술 — 해결한 문제**
-- **Redis**: 캐싱으로 CRM 핵심 API 87%↓, JWT 토큰 블랙리스트로 토큰 탈취 차단
+- **Redis**: 캐싱으로 CRM 핵심 API Latency 87%↓, JWT 토큰 블랙리스트로 토큰 탈취 차단
 - **CloudFront + 다중 리전 배포**: 글로벌 응답 1.2초 → 0.08초(93%↓) — Read 트래픽 집중 구조엔 CQRS·Read Replica 분리 전략 제안
 - **NestJS·Spring Boot**: 헬스케어 CRM·AI 서버 설계·운영, Event-Driven 변경 이력 추적 구축
 
@@ -55,22 +56,23 @@ tags: [resume, profile, career, fullstack]
 [주요 역할]
 - 전자 차트 요약 자동화 및 시술 상품 추천 AI 서버를 **인프라 제외 전 영역 1인 개발·운영**
 [핵심 성과]
-- 일 약 100건 규모의 환자 차트 데이터를 전처리·정제 후 Gemini API에 전달하는 프롬프트 파이프라인 설계
-- (문제) 의료진의 수작업 차트 정리 부담 → 전자 차트 요약 자동화로 수동 차트 업무 제거
-- 신규 환자 설문 데이터와 시술 이력을 결합한 시술 상품 추천 시스템 개발
+- 일 약 100건 규모 환자 데이터를 **민감정보(PII) 마스킹·비식별화 → 전자 차팅 형식 정규화 → Gemini 프롬프트 생성** 단계로 처리하는 파이프라인 설계
+- 사내 LLM 지식 위키를 구축해 AI가 검증된 사내 지식을 근거로 답하도록 설계 — 사실과 다른 답변(할루시네이션)을 줄이고 AI 호출 비용(토큰) 절감
+- 의료진이 수작업으로 정리하던 전자 차트를 요약 자동화로 대체해 수동 차트 업무 제거
+- 환자 관심도(설문)와 최근 시술 이력을 결합해 시술 상품을 추천하는 시스템 개발
 
 **THUB - B2B, B2C 병원 내 고객 CRM, 전자차트 풀스택 개발 (Spring Boot + ReactJS)**
 2025.02 - 2026.03
 [주요 역할]
 - **서버 2인 팀에서 백엔드(Spring Boot)·프론트(React) 풀스택 개발** — 병원 고객 CRM·전자차트 기능 개발·운영
-- 본인 담당: **메시지·메뉴 도메인 리팩토링**, 다수 **핫픽스·이슈 대응**
+- 본인 담당: **메시지·상품 도메인 리팩토링**, 다수 **핫픽스·이슈 대응**
 [핵심 성과]
 - 누적 고객 5000명 규모 CRM에서 주요 API 병목 분석, 병렬 처리 + Redis 캐싱 도입으로 응답 시간 15초 → 2초 (87% 단축)
 - 데이터 정합성 확보를 위한 Event-Driven 기반 EntityChangeLog 시스템 설계 및 도입, 변경 이력 추적 체계 구축
 - JUnit + Mockito 기반 테스트 환경을 주도적으로 구축, given/when/then + Factory 패턴으로 팀 컨벤션 정립
-- (문제) 경영진의 반복적 수동 데이터 요청 → Retool 통계 대시보드를 구축해 반복 쿼리를 셀프서비스로 전환, 수동 요청 업무 제거
-- (문제) 이슈 트래킹·PR 작성에 반복 소요되는 시간 → Claude Code + MCP(Sentry·Notion) 연동으로 이슈 인지 → Fix → PR 작성 자동화 파이프라인 구축, PR 리뷰 품질 향상
-- 더 나은 개발 환경을 위해 **회고·개발 계획서를 작성**해 팀 개발 프로세스 개선
+- 경영진의 반복적 데이터 요청을 Retool 통계 대시보드로 셀프서비스화해 반복 쿼리·수동 요청 업무 제거
+- 신규 지점 가맹마다 운영팀이 수작업하던 기초 데이터 생성을 **Retool 데이터 마이그레이션 페이지(UI/UX 1인 기획·구축)의 원버튼**으로 대체 — 클릭 시 SQL 스크립트를 트랜잭션으로 실행해 원자적으로 생성하고 운영팀 수동 온보딩 제거
+- 반복되던 이슈 트래킹·PR 작성을 Claude Code + MCP(Sentry·Notion) 연동으로 자동화 — 이슈 인지부터 Fix·PR 작성까지 파이프라인화해 PR 리뷰 품질 향상
 - 요구사항 분석·일정 관리·코드 리뷰 피드백 등 PM·시니어와의 실무 협업
 
 ### 오로라파이브
@@ -81,7 +83,7 @@ tags: [resume, profile, career, fullstack]
 - 주요 역할
 - Node.js 백엔드 개발 및 글로벌 인프라 구축
 - 핵심 성과
-- (문제) 글로벌 사용자의 높은 응답 지연 → AWS CloudFront + 다중 리전 배포로 평균 응답 1.2초 → 0.08초 (93% 단축); Read 트래픽 집중 구조엔 CQRS·Read Replica 분리 전략 제안 (서버 2인)
+- 글로벌 사용자의 높은 응답 지연을 AWS CloudFront + 다중 리전 배포로 해소, 평균 응답 1.2초 → 0.08초 (93% 단축); Read 트래픽 집중 구조엔 CQRS·Read Replica 분리 전략 제안 (서버 2인)
 - 다국어: 테이블 재설계 + i18n 도입, 번역 자동화 스크립트로 번역 오류율 80% 감소
 - 환율 변동 결제 손실 방지 — 한국수출입은행 API 기반 환율 자동 갱신 스케줄러·캐싱 구현
 - Jest 커버리지 80%+ & Slack + AWS CloudWatch 실시간 모니터링으로 장애 대응 속도 개선
