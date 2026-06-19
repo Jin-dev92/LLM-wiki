@@ -15,7 +15,7 @@ tags: [resume, profile, career, fullstack]
 > [[resume-writing-principles]] 기준으로 ① 상단 임팩트 헤드라인, ② 차별화 경험(Claude Code 자동화) 상단 노출,
 > ③ 핵심 성과 문제→대처→결과 재구성, ④ 주력 기술↔해결한 문제 연결, ⑤ 하단 중복 스킬 섹션 제거(상단 스택에 통합)를 적용했다.
 > 성과·수치는 원본 그대로 사용(창작 없음). 단, **PDF 원문의 사실 오류 2건은 정정**: 프리랜서 표기(정규직→프리랜서),
-> TTC 재직기간(1년 2개월→1년 1개월=실제 13개월). 원본 ↔ 이 파일을 diff하면 변경분이 보인다.
+> TTC 재직기간(1년 2개월→1년 1개월=실제 13개월). 경력 표기는 **5년 차 기준으로 통일**(세부 합산 수치는 생략). 원본 ↔ 이 파일을 diff하면 변경분이 보인다.
 
 # 김의진
 
@@ -36,7 +36,7 @@ tags: [resume, profile, career, fullstack]
 - Database: PostgreSQL, MySQL, MongoDB, Redis, Aurora DB, SQL
 - Infra: AWS (ECS, ECR, RDS, CloudFront, Lambda), Docker, CI/CD (GitHub Actions, CodePipeline)
 - Test: Jest, JUnit, Mockito
-- Tool: Jira, Notion, Slack, Git, intelliJ
+- Tool: Jira, Notion, Slack, Git, IntelliJ
 - AI: Claude Code, Gemini, GitHub Copilot
 - APM: Sentry, AWS CloudWatch
 
@@ -45,15 +45,15 @@ tags: [resume, profile, career, fullstack]
 - **CloudFront + 다중 리전 배포**: 글로벌 응답 1.2초 → 0.08초(93%↓) — Read 트래픽 집중 구조엔 CQRS·Read Replica 분리 전략 제안
 - **NestJS·Spring Boot**: 헬스케어 CRM·AI 서버 설계·운영, Event-Driven 변경 이력 추적 구축
 
-## 경력 4년 3개월
+## 경력
 
 ### TTC
-2025.02 - 2026.03 (1년 1개월) 정규직 개발
+2025.02 - 2026.03 (1년 1개월) 정규직
 
 **THUB AI - THUB 솔루션 내 사용되는 AI 서버 개발 및 운영 (NestJS)**
 2025.07 - 2026.03
 [주요 역할]
-- 전자 차트 요약 자동화 및 시술 상품 추천 AI 서버를 **인프라를 제외하고 1인 개발·운영**
+- 전자 차트 요약 자동화 및 시술 상품 추천 AI 서버를 **인프라 제외 전 영역 1인 개발·운영**
 [핵심 성과]
 - 일 약 100건 규모의 환자 차트 데이터를 전처리·정제 후 Gemini API에 전달하는 프롬프트 파이프라인 설계
 - (문제) 의료진의 수작업 차트 정리 부담 → 전자 차트 요약 자동화로 수동 차트 업무 제거
@@ -83,7 +83,7 @@ tags: [resume, profile, career, fullstack]
 - 핵심 성과
 - (문제) 글로벌 사용자의 높은 응답 지연 → AWS CloudFront + 다중 리전 배포로 평균 응답 1.2초 → 0.08초 (93% 단축); Read 트래픽 집중 구조엔 CQRS·Read Replica 분리 전략 제안 (서버 2인)
 - 다국어: 테이블 재설계 + i18n 도입, 번역 자동화 스크립트로 번역 오류율 80% 감소
-- 환율 변동 결제 손실 방지 — 한국수출입은행 API 기반 환율 자동 갱신 스케쥴러·캐싱 구현
+- 환율 변동 결제 손실 방지 — 한국수출입은행 API 기반 환율 자동 갱신 스케줄러·캐싱 구현
 - Jest 커버리지 80%+ & Slack + AWS CloudWatch 실시간 모니터링으로 장애 대응 속도 개선
 - DeliveryTracker GraphQL API 연동으로 운송장 번호 기반 실시간 배송 조회 구현
 
@@ -93,11 +93,11 @@ tags: [resume, profile, career, fullstack]
 - React 기반 백오피스 아키텍처 설계 및 외부 프리랜서 2~3명 협업
 [핵심 성과]
 - 빌드 최적화를 통한 배포 시간 및 앱 실행 시간 70% 단축
-- AWS lambda를 통한 로딩 속도 3.2초 → 0.8초 (80% 개선)
+- AWS Lambda를 통한 로딩 속도 3.2초 → 0.8초 (80% 개선)
 - React Query 캐싱 전략 설계 및 성능 분석
 
 ### 프리랜서
-2022.01 - 2023.04 (1년 4개월) 프리랜서
+2022.01 - 2023.04 (1년 4개월)
 
 **Electric Vehicle 쇼핑몰 및 전기 충전 구독 서비스 1인 서버 개발 및 유지보수 (1년 3개월)**
 2022.01 - 2023.04
@@ -116,7 +116,7 @@ tags: [resume, profile, career, fullstack]
 
 ### 펄어비스
 2018.10 - 2019.04 (7개월) 정규직
-- **검은 사막(PC·Mobile·XBOX) 게임 UI 컴포넌트 개발 (5개월)** — 다국어 로컬라이징(대만·유럽), 게임 로그 분석 트러블슈팅, 전쟁 컨텐츠 테스트 케이스 작성
+- **검은 사막(PC·Mobile·XBOX) 게임 UI 컴포넌트 개발 (5개월)** — 다국어 로컬라이징(대만·유럽), 게임 로그 분석 트러블슈팅, 전쟁 콘텐츠 테스트 케이스 작성
 
 ## 학력
 한국폴리텍 I 대학 서울정수캠퍼스
@@ -131,7 +131,7 @@ tags: [resume, profile, career, fullstack]
 
 [DB 자격증] SQLD
 2020.12 기타
-데이터베이스(Oracle 및 MySql) 관련 자격증이며, 한국데이터베이스진흥센터에서 발행하는 자격증입니다.
+데이터베이스(Oracle 및 MySQL) 관련 자격증이며, 한국데이터베이스진흥센터에서 발행하는 자격증입니다.
 
 [교육] 스마트 웰빙을 위한 Mashup 개발자 과정 (쌍용교육센터) · 2016.07
 - 팀 프로젝트(식당 예약: DB 설계·예약 보드 개발) + 개인 프로젝트(쇼핑몰 제작)
