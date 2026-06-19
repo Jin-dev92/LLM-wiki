@@ -31,6 +31,7 @@ Always respond in Korean (한국어).
 - 파일을 삭제해야 하는 경우 물어보고 삭제 할 것
 - context 가 70%를 초과한 경우 폴더 내 docs 폴더를 찾아 현재까지의 진행상황을 md 형식으로 저장하고 /clear 를 실행 후, 지금까지의 진행상황을 저장해둔 md 파일을 자동으로 읽도록 해
 - PR 본문·작업 산출물에는 **항상 기획/계획이 되는 문서나 링크(스펙·플랜 md 경로, Notion URL 등)를 첨부**할 것. 리뷰어·미래의 내가 작업 근거와 맥락을 따라갈 수 있도록 한다
+- PR을 작성하기 전에 **base 브랜치로부터 rebase 한 뒤 push**할 것. (예: `git fetch origin && git rebase origin/<base> && git push --force-with-lease`) 최신 base 위에서 충돌을 먼저 해소해 리뷰·머지를 깔끔하게 한다
 
 ---
 
