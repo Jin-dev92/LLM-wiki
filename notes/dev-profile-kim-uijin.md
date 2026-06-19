@@ -24,7 +24,7 @@ tags: [profile, career, fullstack, backend, infra]
 
 ### 반복되는 강점 패턴 (성과로 검증됨)
 - **성능 최적화**: API 응답 1.2s→0.08s(93%), 15s→2s(87%), 로딩 3.2s→0.8s(80%) — 병렬 처리·캐싱·CDN·Read Replica·빌드 최적화
-- **0→1 / 1인 풀스택**: EV 충전 구독 서비스 요구사항~배포 전 과정 1인, Spring→Django 마이그레이션 주도
+- **1인 풀스택 운영·마이그레이션**: EV 충전 구독 서비스 단독 담당, 기존 Spring Boot → Django 마이그레이션 주도(서버 지연 80%↓)
 - **자동화**: PR 작성/리뷰 자동화, 환율 갱신 스케줄러, 번역 자동화(오류율 80%↓), CI/CD
 - **신뢰성**: Event-Driven 변경이력(EntityChangeLog), JWT 블랙리스트, 테스트 커버리지 80%+, 실시간 모니터링
 

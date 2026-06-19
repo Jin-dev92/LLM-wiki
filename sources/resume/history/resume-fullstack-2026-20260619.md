@@ -28,7 +28,7 @@ tags: [resume, profile, career, fullstack]
 **대표 성과 (3줄 요약)**
 - **성능 최적화**: 글로벌 API 응답 1.2초 → 0.08초(93%↓), CRM 핵심 API 15초 → 2초(87%↓) — 병렬 처리·캐싱·CDN·다중 리전으로 병목 제거
 - **자동화 파이프라인**: Claude Code + MCP(Sentry·Notion) 연동으로 **이슈 인지 → Fix → PR 작성**까지 PR 리뷰 파이프라인 구축
-- **신규 서비스 단독 구축(풀스택)**: 구독형 EV 서비스 요구사항~배포 1인 담당, Spring Boot → Django 마이그레이션으로 서버 지연 80%↓
+- **기존 서비스 단독 운영·개선(풀스택)**: 구독형 EV 서비스 1인 담당, Spring Boot → Django 마이그레이션으로 서버 지연 80%↓
 
 ### 기술 스택
 - Backend: NestJS, Node.js, TypeScript, Spring Boot, Java, ExpressJS, Python, Django, JPA, ORM
