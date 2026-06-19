@@ -35,6 +35,6 @@ e-commerce(글로벌), 헬스케어 CRM/전자차트, AI 서버(차트 요약·�
 정보처리기사(2024.12), SQLD(2020.12), 한국폴리텍 I 대학 유비쿼터스통신과(2016 졸).
 
 ## 관련
-- [[sources/resume-fullstack-2026]] — 출처 이력서 원문
+- [[sources/resume/resume-fullstack-2026]] — 출처 이력서 원문
 - [[rules/stacks/nestjs]] · [[rules/stacks/java]] — 주력 백엔드 스택 운영 규칙
 - [[projects/estate-server]] — NestJS+Prisma 백엔드 (현재 작업 맥락)
