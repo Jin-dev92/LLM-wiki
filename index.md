@@ -18,13 +18,15 @@ tags: [index]
 - [[agentic-workflow-patterns]] — Anthropic의 재사용 5패턴(Chaining·Routing·Parallel·Orchestrator·Evaluator).
 - [[agentic-reasoning-design-patterns]] — Andrew Ng의 4패턴(Reflection·Tool use·Planning·Multi-agent).
 - [[dev-profile-kim-uijin]] — 5년 차 풀스택 개발자 프로필(강점·주력 스택·대표 성과).
+- [[resume-writing-principles]] — 경력직 이력서 작성 원칙(상단 임팩트·Before→After·문제→대처·기여도).
 
 ## sources
 - [[sources/llm-agents/building-effective-agents]] — Anthropic 실용 에이전트 구축 가이드 (web).
 - [[sources/llm-agents/andrew-ng-agentic-workflows-sequoia]] — Andrew Ng Sequoia 강연, 4패턴+실험 (youtube).
 - [[sources/claude-code/claude-code-core-tools-guide]] — Claude Code 추천 도구 6종 설치 가이드 (local).
 - [[sources/claude-code/claude-code-gstack-superpowers-guide]] — GStack+Superpowers 워크플로우 가이드 (local).
-- [[sources/resume-fullstack-2026]] — 김의진 이력서, 경력·성과·스택·자격증 (pdf).
+- [[sources/resume/resume-fullstack-2026]] — 김의진 이력서, 경력·성과·스택·자격증 (pdf).
+- [[sources/career/resume-recruiter-guide]] — 채용담당자 관점 이력서 개선 가이드 (local).
 
 ## rules
 - [[rules/company/git-pr]] — 팀 Git/PR + 공통 프로세스(문서위치·TDD·justfile) (company).
