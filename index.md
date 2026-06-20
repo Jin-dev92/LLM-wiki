@@ -54,6 +54,7 @@ tags: [index]
 ## decisions (ADR)
 - `docs/decisions/ADR-0001-keep-gstack-superpowers-over-agent-skills.md` — Claude Code 기반을 gstack+superpowers로 유지(agent-skills 전환 안 함) + 3종 cherry-pick. flip condition 포함.
 - `docs/decisions/ADR-0002-quant-server-feature-based-fastapi.md` — quant-server를 기능별(feature-based) FastAPI 구조로 채택(DDD 비채택) + uv/ruff/mypy/pytest 툴체인. 재검토 조건 포함.
+- `docs/decisions/ADR-0003-algo-trading-phase0-design.md` — algo-trading 서버 Phase 0 결정: 포트 최소+역할별 구조(ADR-0002 refine)·자체 백테스트 루프+quantstats·백테스트만(DB/서버 보류)·MA 전략. 리스크관리는 Phase 1 예약.
 
 ## MOC
 - [[MOC/Home]] — 위키 진입점.
