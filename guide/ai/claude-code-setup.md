@@ -3,7 +3,7 @@ type: project
 title: Claude Code 환경 셋업 (스킬·플러그인 온보딩)
 summary: 다른 환경에서 현재 Claude Code 환경을 재현하기 위한 온보딩 체크리스트 — 플러그인 4개, gstack 스킬 스위트, MCP 커넥터, 추천 확장 도구, 트러블슈팅, 설치 명령.
 created: 2026-06-18
-updated: 2026-06-18
+updated: 2026-06-20
 visibility: private
 status: active
 tags: [meta, claude-code, onboarding, setup, sync]
@@ -88,9 +88,27 @@ claude.ai 계정에 연동된 MCP 서버들(도구로 노출됨). 새 환경에�
 
 | 도구 | 언제/왜 | 설치 |
 |---|---|---|
+| **graphify** ⭐ | **입사 직후 낯선 코드베이스 빠른 파악** — 폴더(코드·문서·논문)를 지식그래프로(커뮤니티 탐지·god node·경로/explain 질의). 위키 provenance(EXTRACTED/INFERRED/AMBIGUOUS)·GIGO 철학과 정렬 | `uv tool install graphifyy` → `graphify install` (레포 한정: `graphify install --project`) |
 | Matt Pocock Skills | PR 전 코드 리뷰·아키텍처 개선 (`tdd`·`grill-me`·`diagnose` 등) | `npx skills@latest add mattpocock/skills` → `/setup-matt-pocock-skills` |
 | Vercel React Best Practices | React/Next.js 성능·서버컴포넌트 패턴 강제 | `npx skills add vercel-labs/agent-skills` |
 | PPTX / PDF Skills | 보고서·슬라이드 자동 생성 | `npx skills add skills-ai/presentation-tools` |
+
+> **graphify 주의점** (도입 전 확인): ⓐ Python + `uv`(권장) 필요 — Mac에선 plain `pip` 피할 것. ⓑ 의미 추출(semantic)은 LLM 토큰 비용 발생, 큰 레포는 서브에이전트 병렬 처리. ⓒ gstack의 `gbrain`(코드 지식 레이어)과 **기능이 일부 중복** → 입사 환경에서 둘 중 무엇을 쓸지 한 번 비교. ⓓ repo: `safishamsi/graphify`, PyPI 패키지명은 `graphifyy`(y 두 개), CLI는 `graphify`. 스킬은 `~/.claude/skills/graphify/`에 등록됨. 분석 근거: 4개 skills 레포 분석(2026-06-20 대화) (분석만, 미설치 상태).
+
+---
+
+## 5-1. cherry-pick 설치한 개별 스킬 (agent-skills 발췌, 2026-06-20)
+`addyosmani/agent-skills`로 **전환하지 않고**(→ `docs/decisions/ADR-0001`), 고유값 스킬만 발췌해
+글로벌 `~/.claude/skills/`에 복사. gstack 디렉터리와 형제라 `/gstack-upgrade`가 건드리지 않음.
+slash 명령 아닌 auto-activate 스킬이라 gstack과 충돌 없음.
+
+| 스킬 | 왜 | 비고 |
+|---|---|---|
+| `documentation-and-adrs` | 로컬에 ADR *작성* 기능 부재 → 공백 보충 | gstack `document-generate`는 ADR 읽기만 |
+| `doubt-driven-development` | 작업 중 적대적 fresh-context 리뷰(보안·민감 로직) | `agents/` 로스터 없이 설치 → generic 서브에이전트로 degrade(자체 fallback 보유) |
+| `source-driven-development` (+ `hooks/sdd-cache-*`) | 공식문서 grounding으로 할루시네이션 방지 | ✅ 훅 배선 완료(2026-06-20): `~/.claude/settings.json`의 PreToolUse/PostToolUse(matcher `WebFetch`)에 등록. 복원 시 동일 설정 필요 |
+
+**복원**(새 환경): 위 경로에 `addyosmani/agent-skills`의 동일 파일을 복사하면 됨(upstream 자동 동기화 없음 — 수동 갱신).
 
 ---
 
@@ -139,6 +157,8 @@ iCloud `claude/guides`에서 가져온 인프라·MCP·워크플로우 설정 �
 - 2026-06-18: iCloud `guides/ai` 2개를 sources/에 원문 보관, `guides/{mcp,aws,github-actions}` 5개를 `guide/` 하위로 반입.
 - 2026-06-18: 글로벌 지침 사본을 `guide/CLAUDE.md` → `guide/claude-global.md`로 개명(하위 CLAUDE.md 자동로드 방지).
 - 2026-06-18: 주제별 정리를 위해 `claude-code-setup.md`·`claude-global.md`를 `guide/ai/`로 이동(iCloud `guides/ai` 구조와 일치).
+- 2026-06-20: 추천 확장 도구에 **graphify**(`safishamsi/graphify`) 추가 — 입사 직후 낯선 코드베이스 온보딩용으로 판단. **문서에만 기재, 실제 설치 안 함**(사용자 지시). gbrain과 기능 중복은 도입 시 비교하기로. 4개 skills 레포 분석 결과 graphify가 이 위키 철학과 가장 정렬됨(4개 skills 레포 분석(2026-06-20 대화)).
+- 2026-06-20: `addyosmani/agent-skills` 전체 분석 후 **전환하지 않기로 결정**(→ `docs/decisions/ADR-0001`). gstack+superpowers가 실행 도구 측면에서 상위집합이라 전환은 순손실. 대신 `documentation-and-adrs`·`doubt-driven-development`·`source-driven-development` 3종을 cherry-pick해 글로벌 설치(§5-1).
 
 ## 삽질/배운 것
 - `~/.claude/skills`의 개별 스킬을 하나하나 설치한 게 아니라 gstack 레포 하나가
