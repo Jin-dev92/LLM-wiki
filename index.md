@@ -21,6 +21,7 @@ tags: [index]
 - [[resume-writing-principles]] — 경력직 이력서 작성 원칙(상단 임팩트·Before→After·문제→대처·기여도).
 - [[agent-skill-authoring]] — SKILL.md 작성 패턴(description=무엇+Use when, 계층 로딩, rigid/flexible).
 - [[agent-skill-archetypes]] — 에이전트 스킬 4가지 아키타입(워크플로우/취향/도구어댑터/프레임워크) + 도입 판단 규칙.
+- [[ui-ux-reference]] — 토스·당근·Linear·Stripe 등 11개 서비스 UI/UX를 모방용 패턴·디자인 토큰·안티패턴으로 정리.
 
 ## sources
 - [[sources/llm-agents/building-effective-agents]] — Anthropic 실용 에이전트 구축 가이드 (web).
@@ -39,6 +40,7 @@ tags: [index]
 - [[rules/stacks/nestjs-test]] — NestJS 테스트 코드 규칙 (stack).
 - [[rules/stacks/frontend]] — React Query+Zustand+TS FE 개발 규칙 (stack).
 - [[rules/stacks/react]] — React 함수형 컴포넌트 베이스 룰 (stack).
+- [[rules/stacks/nextjs]] — Next.js App Router 규칙(Server/Client 경계·Server Action·NEXT_PUBLIC_ 민감키 금지) (stack).
 
 ## projects
 - [[projects/estate-server]] — NestJS+Prisma+Kafka 플랫폼 백엔드 (최신 컨벤션 기준).
