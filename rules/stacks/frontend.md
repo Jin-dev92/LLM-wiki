@@ -3,7 +3,7 @@ type: rule
 title: Frontend 개발 규칙 (React Query + Zustand + TS)
 summary: React Query v5+Zustand+TypeScript+Axios 기반 FE 규칙. API 4파일 세트, QueryKey/Hook 패턴, Zustand vs RQ, 금지 패턴.
 created: 2026-06-18
-updated: 2026-06-18
+updated: 2026-06-22
 visibility: team
 scope: stack
 applies_to: [react, typescript, react-query, zustand, axios]
@@ -383,3 +383,22 @@ field.trim()
 // ✅ GOOD
 String(field ?? "").trim()
 ```
+
+---
+
+## 매직 스트링 / 상수 단일 출처 (No Magic Strings)
+<!-- harvested from estate-server/web CLAUDE.md (2026-06-22) -->
+
+의미 있거나 반복되는 문자열 리터럴(쿠키·스토리지 키, 역할, 내부 API 경로 등)을
+코드 곳곳에 직접 쓰지 않는다. 단일 출처 상수 파일에 모아 import해서 쓴다.
+
+- **식별자**(결합용 문자열: 쿠키명·스토리지 키·역할·내부 API 경로)는 `lib/constants.ts`로
+  모은다. 예: `SESSION_COOKIE`, `ROLE`, `API_ROUTES`.
+- **사용자 노출 문구**(에러·안내 메시지)는 `lib/messages.ts`(`MESSAGES`)에 둔다.
+  식별자와 카피를 한 파일에 섞지 않는다.
+- 값이 정해진 닫힌 집합(역할 등)은 `as const` 객체 + 파생 유니온 타입으로 정의해
+  타입 안전성 확보. 예: `ROLE`, `SignupRole`. (→ 위 "Enum 규칙"과 동일 패턴)
+- 같은 문자열이 2곳 이상 쓰이면 즉시 상수로 추출(DRY). 리뷰 시 새 매직 스트링이 보이면
+  상수화부터 요구한다.
+- 같은 상황의 메시지는 `MESSAGES` 한 곳에서만 정의해 문구 불일치·중복 방지.
+  다국어 필요 시 `MESSAGES`를 i18n 카탈로그로 승격.
