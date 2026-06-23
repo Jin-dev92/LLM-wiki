@@ -22,6 +22,10 @@ tags: [index]
 - [[agent-skill-authoring]] — SKILL.md 작성 패턴(description=무엇+Use when, 계층 로딩, rigid/flexible).
 - [[agent-skill-archetypes]] — 에이전트 스킬 4가지 아키타입(워크플로우/취향/도구어댑터/프레임워크) + 도입 판단 규칙.
 - [[ui-ux-reference]] — 토스·당근·Linear·Stripe 등 11개 서비스 UI/UX를 모방용 패턴·디자인 토큰·안티패턴으로 정리.
+- [[harness-engineering]] — 모델 가중치 외부의 모든 것(지침·도구·지식·검증)을 설계해 에이전트 실수 재발을 막는 일.
+- [[self-improvement-loop]] — 가이드+센서로 에이전트가 스스로 검증·교정하는 회로. Evaluator-Optimizer의 결정론적 변형.
+- [[spec-as-code]] — E2E 테스트 코드 = 읽으면 명세·돌리면 검증인 두 얼굴.
+- [[playwright-e2e-for-agents]] — Playwright E2E를 에이전트 검증 센서로 쓰는 실전(Critical Flows·flaky 예방·모킹·prefill·Trace·3 에이전트).
 
 ## sources
 - [[sources/llm-agents/building-effective-agents]] — Anthropic 실용 에이전트 구축 가이드 (web).
@@ -29,6 +33,7 @@ tags: [index]
 - [[sources/claude-code/claude-code-core-tools-guide]] — Claude Code 추천 도구 6종 설치 가이드 (local).
 - [[sources/claude-code/claude-code-gstack-superpowers-guide]] — GStack+Superpowers 워크플로우 가이드 (local).
 - [[sources/claude-code/agent-skills-repos-analysis]] — 공개 스킬 레포 4종 분석·도입 판정 (memo).
+- [[sources/llm-agents/playwright-e2e-harness-naverpay]] — 네이버페이 FE의 Playwright E2E 하네스 구축 발표 (youtube).
 - [[sources/resume/resume-fullstack-2026]] — 김의진 이력서, 경력·성과·스택·자격증 (pdf).
 - [[sources/career/resume-recruiter-guide]] — 채용담당자 관점 이력서 개선 가이드 (local).
 
@@ -58,3 +63,4 @@ tags: [index]
 
 ## MOC
 - [[MOC/Home]] — 위키 진입점.
+- [[MOC/harness-engineering]] — 하네스 엔지니어링 주제 허브(하네스·자가개선 루프·E2E 센서).

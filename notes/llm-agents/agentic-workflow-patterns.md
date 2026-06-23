@@ -21,4 +21,5 @@ LLM 기반 시스템에는 재사용 가능한 5가지 워크플로 패턴이 �
 
 ## 관련
 - [[workflow-vs-agent]]
+- [[self-improvement-loop]] — Evaluator-Optimizer의 평가자를 결정론적 검증(테스트)으로 대체한 실전 적용
 - 출처: [[sources/llm-agents/building-effective-agents]]
