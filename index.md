@@ -3,7 +3,7 @@ type: moc
 title: Index
 summary: 위키의 모든 페이지를 한곳에 모은 마스터 카탈로그. /ingest 시 자동 갱신.
 created: 2026-06-18
-updated: 2026-06-20
+updated: 2026-06-24
 visibility: private
 tags: [index]
 ---
@@ -19,6 +19,7 @@ tags: [index]
 - [[agentic-reasoning-design-patterns]] — Andrew Ng의 4패턴(Reflection·Tool use·Planning·Multi-agent).
 - [[dev-profile-kim-uijin]] — 5년 차 풀스택 개발자 프로필(강점·주력 스택·대표 성과).
 - [[resume-writing-principles]] — 경력직 이력서 작성 원칙(상단 임팩트·Before→After·문제→대처·기여도).
+- [[ai-experience-on-resume]] — AI 경험은 "도구 사용"이 아니라 "프로세스 설계·통제"로 써라. 승인 게이트·역할 분리·로깅 3신호 + 복붙 문구.
 - [[agent-skill-authoring]] — SKILL.md 작성 패턴(description=무엇+Use when, 계층 로딩, rigid/flexible).
 - [[agent-skill-archetypes]] — 에이전트 스킬 4가지 아키타입(워크플로우/취향/도구어댑터/프레임워크) + 도입 판단 규칙.
 - [[ui-ux-reference]] — 토스·당근·Linear·Stripe 등 11개 서비스 UI/UX를 모방용 패턴·디자인 토큰·안티패턴으로 정리.
@@ -36,6 +37,7 @@ tags: [index]
 - [[sources/llm-agents/playwright-e2e-harness-naverpay]] — 네이버페이 FE의 Playwright E2E 하네스 구축 발표 (youtube).
 - [[sources/resume/resume-fullstack-2026]] — 김의진 이력서, 경력·성과·스택·자격증 (pdf).
 - [[sources/career/resume-recruiter-guide]] — 채용담당자 관점 이력서 개선 가이드 (local).
+- [[sources/career/ai-experience-on-resume-thinklighthouse]] — 생각등대, 이력서 AI 경험 표현 3원칙+복붙 문구 (youtube).
 
 ## rules
 - [[rules/company/git-pr]] — 팀 Git/PR + 공통 프로세스(문서위치·TDD·justfile) (company).

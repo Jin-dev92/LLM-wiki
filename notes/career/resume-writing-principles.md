@@ -40,5 +40,6 @@ README 1~2줄+스택, 노출 레포 3~5개 고정, README/커밋 없는 레포�
 
 ## 관련
 - [[sources/career/resume-recruiter-guide]] — 출처 가이드
+- [[ai-experience-on-resume]] — AI 활용 경험 항목에 특화된 적용(도구 사용 → 프로세스 설계·통제)
 - [[dev-profile-kim-uijin]] — 이 원칙을 적용할 대상(내 경력 프로필)
 - [[sources/resume/resume-fullstack-2026]] — 원칙 적용 대상 이력서(PDF 1:1 원본)
