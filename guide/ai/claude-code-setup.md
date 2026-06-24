@@ -3,7 +3,7 @@ type: project
 title: Claude Code 환경 셋업 (스킬·플러그인 온보딩)
 summary: 다른 환경에서 현재 Claude Code 환경을 재현하기 위한 온보딩 체크리스트 — 플러그인 4개, gstack 스킬 스위트, MCP 커넥터, 추천 확장 도구, 트러블슈팅, 설치 명령.
 created: 2026-06-18
-updated: 2026-06-20
+updated: 2026-06-24
 visibility: private
 status: active
 tags: [meta, claude-code, onboarding, setup, sync]
@@ -112,6 +112,23 @@ slash 명령 아닌 auto-activate 스킬이라 gstack과 충돌 없음.
 
 ---
 
+## 5-2. 감사 로깅 훅 (cc-audit-hooks, 2026-06-24)
+Claude Code 프롬프트·도구 호출을 JSONL로 로깅하고 위험 Bash 명령을 PreToolUse에서 차단하는
+자작 훅. **소스 = private repo `Jin-dev92/cc-audit-hooks`**, 라이브 = `~/.claude/hooks/audit/`.
+표준 라이브러리만, 훅은 세션을 깨지 않음(예외 삼키고 exit 0).
+
+**복원**:
+```sh
+git clone https://github.com/Jin-dev92/cc-audit-hooks.git ~/WebstormProjects/cc-audit-hooks
+cd ~/WebstormProjects/cc-audit-hooks && python3 install.py
+```
+- `install.py`가 `~/.claude/hooks/audit/` 배치 + `settings.json`의 UserPromptSubmit/PreToolUse/PostToolUse에 **기존 보존하며** 병합 등록(§5-1의 SDD WebFetch 훅과 공존). 멱등.
+- 로그: `~/.claude/logs/audit/*.jsonl`(0600) + `index.db`. 리포트: `python3 ~/.claude/hooks/audit/audit_report.py`.
+- 차단 규칙: `~/.claude/hooks/audit/danger_rules.json`. ⚠️ 레닥션은 휴리스틱 — 로그 파일 공유·커밋 금지.
+- 상세 복원 가이드: [[audit-logging-setup]]. 동기: [[ai-experience-on-resume]] tip 3.
+
+---
+
 ## 6. 함께 보관한 참고 가이드 (`guide/` 하위)
 iCloud `claude/guides`에서 가져온 인프라·MCP·워크플로우 설정 가이드(원문 사본).
 - `guide/mcp/serena-mcp-setup-guide.md` — Serena LSP MCP 설치
@@ -159,6 +176,7 @@ iCloud `claude/guides`에서 가져온 인프라·MCP·워크플로우 설정 �
 - 2026-06-18: 주제별 정리를 위해 `claude-code-setup.md`·`claude-global.md`를 `guide/ai/`로 이동(iCloud `guides/ai` 구조와 일치).
 - 2026-06-20: 추천 확장 도구에 **graphify**(`safishamsi/graphify`) 추가 — 입사 직후 낯선 코드베이스 온보딩용으로 판단. **문서에만 기재, 실제 설치 안 함**(사용자 지시). gbrain과 기능 중복은 도입 시 비교하기로. 4개 skills 레포 분석 결과 graphify가 이 위키 철학과 가장 정렬됨(4개 skills 레포 분석(2026-06-20 대화)).
 - 2026-06-20: `addyosmani/agent-skills` 전체 분석 후 **전환하지 않기로 결정**(→ `docs/decisions/ADR-0001`). gstack+superpowers가 실행 도구 측면에서 상위집합이라 전환은 순손실. 대신 `documentation-and-adrs`·`doubt-driven-development`·`source-driven-development` 3종을 cherry-pick해 글로벌 설치(§5-1).
+- 2026-06-24: 자작 **감사 로깅 훅 cc-audit-hooks** 구축·설치(§5-2). 생각등대 영상 tip 3([[ai-experience-on-resume]]) 실천 — 프롬프트·도구 로깅 + 위험명령 차단. private repo `Jin-dev92/cc-audit-hooks`, brainstorming→writing-plans→subagent-driven으로 TDD 구현(29 tests), opus 전체 리뷰 후 rm 분리플래그 우회·installer 크래시 수정. 라이브 설치 완료(settings.json 백업).
 
 ## 삽질/배운 것
 - `~/.claude/skills`의 개별 스킬을 하나하나 설치한 게 아니라 gstack 레포 하나가

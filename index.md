@@ -55,6 +55,7 @@ tags: [index]
 
 ## guide
 - [[guide/ai/claude-code-setup]] — Claude Code 환경 온보딩(플러그인·gstack 스킬·MCP·추천도구) + 동기화.
+- [[guide/ai/audit-logging-setup]] — 감사 로깅 훅 cc-audit-hooks 복원(clone→install.py→검증→리포트).
 - `guide/ai/claude-global.md` — 글로벌 `~/.claude/CLAUDE.md` 사본(원문 보관).
 - `guide/mcp/` — Serena · AWS MFA+MySQL MCP 설정 가이드(원문 보관).
 - `guide/aws/` — RDS 스냅샷 → 로컬 MySQL 복구 가이드(원문 보관).
