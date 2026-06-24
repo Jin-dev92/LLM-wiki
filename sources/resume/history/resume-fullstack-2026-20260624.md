@@ -159,7 +159,7 @@ tags: [resume, profile, career, fullstack, ai]
 깃허브
 https://github.com/Jin-dev92
 기술적 고민을 적어 놓는 기술 블로그
-https://hallowed-swoop-8ac.notion.site/265d99393f228010b0b4e450e77e4a0b?v=265d99393f2280a480bb000c2a0874b9
+https://buly.kr/883TTon
 
 ---
 
