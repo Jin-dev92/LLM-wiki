@@ -3,7 +3,7 @@ type: moc
 title: 하네스 엔지니어링 (Harness Engineering)
 summary: AI 에이전트가 스스로 일하고 검증하도록 환경을 설계하는 주제 허브 — 하네스·자가개선 루프·검증 센서(E2E)·관련 패턴/룰을 모음.
 created: 2026-06-22
-updated: 2026-06-22
+updated: 2026-06-24
 visibility: private
 tags: [moc, llm, agent, harness]
 ---
@@ -17,6 +17,7 @@ tags: [moc, llm, agent, harness]
 - [[harness-engineering]] — 모델 가중치 외부의 모든 것. 진화하는 시스템.
 - [[self-improvement-loop]] — 가이드 + 센서로 닫는 회로.
 - [[spec-as-code]] — 테스트 = 읽으면 명세, 돌리면 검증.
+- [[agentic-context-platform]] — 사람·에이전트에 동일 컨텍스트(메타데이터)를 공급하는 데이터 플랫폼.
 
 ## 검증 센서 구현
 - [[playwright-e2e-for-agents]] — Playwright E2E를 결정론적 센서로 쓰는 실전 기법.
@@ -34,3 +35,4 @@ tags: [moc, llm, agent, harness]
 ## 출처
 - [[sources/llm-agents/playwright-e2e-harness-naverpay]] — 네이버페이 FE 발표.
 - [[sources/llm-agents/building-effective-agents]] — Anthropic.
+- [[sources/llm-agents/context-provider-naver-d2]] — NAVER 플레이스 Context Provider 발표.

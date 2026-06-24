@@ -27,6 +27,7 @@ tags: [index]
 - [[self-improvement-loop]] — 가이드+센서로 에이전트가 스스로 검증·교정하는 회로. Evaluator-Optimizer의 결정론적 변형.
 - [[spec-as-code]] — E2E 테스트 코드 = 읽으면 명세·돌리면 검증인 두 얼굴.
 - [[playwright-e2e-for-agents]] — Playwright E2E를 에이전트 검증 센서로 쓰는 실전(Critical Flows·flaky 예방·모킹·prefill·Trace·3 에이전트).
+- [[agentic-context-platform]] — 자산 메타데이터를 자산화해 사람·AI 에이전트에 동일 컨텍스트를 공급하는 플랫폼(OpenMetadata·lineage·SKILL).
 
 ## sources
 - [[sources/llm-agents/building-effective-agents]] — Anthropic 실용 에이전트 구축 가이드 (web).
@@ -35,6 +36,7 @@ tags: [index]
 - [[sources/claude-code/claude-code-gstack-superpowers-guide]] — GStack+Superpowers 워크플로우 가이드 (local).
 - [[sources/claude-code/agent-skills-repos-analysis]] — 공개 스킬 레포 4종 분석·도입 판정 (memo).
 - [[sources/llm-agents/playwright-e2e-harness-naverpay]] — 네이버페이 FE의 Playwright E2E 하네스 구축 발표 (youtube).
+- [[sources/llm-agents/context-provider-naver-d2]] — NAVER 플레이스, 사람·AI Agent 통합 Context Provider 구축 발표 (youtube).
 - [[sources/resume/resume-fullstack-2026]] — 김의진 이력서, 경력·성과·스택·자격증 (pdf).
 - [[sources/career/resume-recruiter-guide]] — 채용담당자 관점 이력서 개선 가이드 (local).
 - [[sources/career/ai-experience-on-resume-thinklighthouse]] — 생각등대, 이력서 AI 경험 표현 3원칙+복붙 문구 (youtube).

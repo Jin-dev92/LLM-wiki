@@ -20,6 +20,7 @@ tags: [llm, agent, harness, context-engineering]
 - **사람의 역할**: ①자가개선 루프 설계 ②도구·맥락 제공 ③모델 진화에 맞춰 하네스 진화. 카파시 — "사고(thinking)는 위임해도 책임(taste)은 위임 못 한다." Vercel 원칙 — "올바른 행동을 쉽게 할 수 있도록 환경을 만들어라."
 
 ## 관련
+- [[agentic-context-platform]] — 에이전트에 도메인 컨텍스트(메타데이터)를 공급하는 하네스의 데이터 플랫폼 버전
 - [[self-improvement-loop]] — 하네스가 닫는 회로
 - [[spec-as-code]] — 하네스의 검증 부품(테스트=명세)
 - [[playwright-e2e-for-agents]] — 검증 센서의 구체 구현
