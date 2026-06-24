@@ -1,6 +1,9 @@
 # OS
 .DS_Store
 
+# Claude Code 임시 worktree (자체 .git 포함 — 절대 커밋 금지)
+.claude/worktrees/
+
 # Obsidian (휘발성 작업 상태만 제외, 설정은 추적)
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
