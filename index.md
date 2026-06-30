@@ -3,7 +3,7 @@ type: moc
 title: Index
 summary: 위키의 모든 페이지를 한곳에 모은 마스터 카탈로그. /ingest 시 자동 갱신.
 created: 2026-06-18
-updated: 2026-06-24
+updated: 2026-06-30
 visibility: private
 tags: [index]
 ---
@@ -28,6 +28,8 @@ tags: [index]
 - [[spec-as-code]] — E2E 테스트 코드 = 읽으면 명세·돌리면 검증인 두 얼굴.
 - [[playwright-e2e-for-agents]] — Playwright E2E를 에이전트 검증 센서로 쓰는 실전(Critical Flows·flaky 예방·모킹·prefill·Trace·3 에이전트).
 - [[agentic-context-platform]] — 자산 메타데이터를 자산화해 사람·AI 에이전트에 동일 컨텍스트를 공급하는 플랫폼(OpenMetadata·lineage·SKILL).
+- [[narrative-momentum-strategy]] — 뉴스/공시를 서사→테마→종목 점수(누적·승수)로 변환해 재료 직후 모멘텀을 잡는 퀀트 전략(6단계).
+- [[multi-strategy-regime-diversification]] — 변동성 레짐마다 맞는 전략이 달라 단일 스킬 의존은 위험. 주간 전략별 손익 추적·교체.
 
 ## sources
 - [[sources/llm-agents/building-effective-agents]] — Anthropic 실용 에이전트 구축 가이드 (web).
@@ -35,11 +37,13 @@ tags: [index]
 - [[sources/claude-code/claude-code-core-tools-guide]] — Claude Code 추천 도구 6종 설치 가이드 (local).
 - [[sources/claude-code/claude-code-gstack-superpowers-guide]] — GStack+Superpowers 워크플로우 가이드 (local).
 - [[sources/claude-code/agent-skills-repos-analysis]] — 공개 스킬 레포 4종 분석·도입 판정 (memo).
+- [[sources/claude-code/ai-job-assistant-mcp-playmcp]] — 스티브의 파도타기, Claude Desktop+PlayMCP로 사람인·카카오톡 MCP 붙여 AI 취업비서 만들기 (youtube).
 - [[sources/llm-agents/playwright-e2e-harness-naverpay]] — 네이버페이 FE의 Playwright E2E 하네스 구축 발표 (youtube).
 - [[sources/llm-agents/context-provider-naver-d2]] — NAVER 플레이스, 사람·AI Agent 통합 Context Provider 구축 발표 (youtube).
 - [[sources/resume/resume-fullstack-2026]] — 김의진 이력서, 경력·성과·스택·자격증 (pdf).
 - [[sources/career/resume-recruiter-guide]] — 채용담당자 관점 이력서 개선 가이드 (local).
 - [[sources/career/ai-experience-on-resume-thinklighthouse]] — 생각등대, 이력서 AI 경험 표현 3원칙+복붙 문구 (youtube).
+- [[sources/quant/claude-code-quant-narrative-momentum]] — 오드연구소, Claude Code 퀀트매매 스킬 비교 + 네러티브 모멘텀 전략 (youtube).
 
 ## rules
 - [[rules/company/git-pr]] — 팀 Git/PR + 공통 프로세스(문서위치·TDD·justfile) (company).
