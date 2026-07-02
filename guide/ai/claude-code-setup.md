@@ -1,9 +1,9 @@
 ---
 type: project
 title: Claude Code 환경 셋업 (스킬·플러그인 온보딩)
-summary: 다른 환경에서 현재 Claude Code 환경을 재현하기 위한 온보딩 체크리스트 — 플러그인 4개, gstack 스킬 스위트, MCP 커넥터, 추천 확장 도구, 트러블슈팅, 설치 명령.
+summary: 다른 환경에서 현재 Claude Code 환경을 재현하기 위한 온보딩 체크리스트 — 플러그인 4개, gstack 스킬 스위트, MCP 커넥터, mattpocock/vercel 스킬 팩, 트러블슈팅, 설치 명령.
 created: 2026-06-18
-updated: 2026-06-24
+updated: 2026-07-02
 visibility: private
 status: active
 tags: [meta, claude-code, onboarding, setup, sync]
@@ -89,9 +89,9 @@ claude.ai 계정에 연동된 MCP 서버들(도구로 노출됨). 새 환경에�
 | 도구 | 언제/왜 | 설치 |
 |---|---|---|
 | **graphify** ⭐ | **입사 직후 낯선 코드베이스 빠른 파악** — 폴더(코드·문서·논문)를 지식그래프로(커뮤니티 탐지·god node·경로/explain 질의). 위키 provenance(EXTRACTED/INFERRED/AMBIGUOUS)·GIGO 철학과 정렬 | `uv tool install graphifyy` → `graphify install` (레포 한정: `graphify install --project`) |
-| Matt Pocock Skills | PR 전 코드 리뷰·아키텍처 개선 (`tdd`·`grill-me`·`diagnose` 등) | `npx skills@latest add mattpocock/skills` → `/setup-matt-pocock-skills` |
-| Vercel React Best Practices | React/Next.js 성능·서버컴포넌트 패턴 강제 | `npx skills add vercel-labs/agent-skills` |
 | PPTX / PDF Skills | 보고서·슬라이드 자동 생성 | `npx skills add skills-ai/presentation-tools` |
+
+> Matt Pocock Skills·Vercel React Best Practices는 **설치 완료** → §5-3으로 이동.
 
 > **graphify 주의점** (도입 전 확인): ⓐ Python + `uv`(권장) 필요 — Mac에선 plain `pip` 피할 것. ⓑ 의미 추출(semantic)은 LLM 토큰 비용 발생, 큰 레포는 서브에이전트 병렬 처리. ⓒ gstack의 `gbrain`(코드 지식 레이어)과 **기능이 일부 중복** → 입사 환경에서 둘 중 무엇을 쓸지 한 번 비교. ⓓ repo: `safishamsi/graphify`, PyPI 패키지명은 `graphifyy`(y 두 개), CLI는 `graphify`. 스킬은 `~/.claude/skills/graphify/`에 등록됨. 분석 근거: 4개 skills 레포 분석(2026-06-20 대화) (분석만, 미설치 상태).
 
@@ -126,6 +126,37 @@ cd ~/WebstormProjects/cc-audit-hooks && python3 install.py
 - 로그: `~/.claude/logs/audit/*.jsonl`(0600) + `index.db`. 리포트: `python3 ~/.claude/hooks/audit/audit_report.py`.
 - 차단 규칙: `~/.claude/hooks/audit/danger_rules.json`. ⚠️ 레닥션은 휴리스틱 — 로그 파일 공유·커밋 금지.
 - 상세 복원 가이드: [[audit-logging-setup]]. 동기: [[ai-experience-on-resume]] tip 3.
+
+---
+
+## 5-3. 외부 스킬 팩 설치 (mattpocock/skills, vercel-labs/agent-skills, 2026-07-02)
+`npx skills` CLI(`vercel-labs/skills`)로 글로벌 설치(`~/.claude/skills/` 평면 복사, gstack과 동일 위치).
+설치 전 기존 스킬/플러그인과 이름 충돌을 확인한 뒤 진행함.
+
+**mattpocock/skills — 19개 설치** (전체 20개 중 `code-review` 제외):
+```sh
+npx skills@latest add mattpocock/skills \
+  --skill ask-matt --skill codebase-design --skill diagnosing-bugs --skill domain-modeling \
+  --skill grill-with-docs --skill implement --skill improve-codebase-architecture \
+  --skill prototype --skill research --skill setup-matt-pocock-skills --skill tdd \
+  --skill to-issues --skill to-prd --skill triage --skill grill-me --skill grilling \
+  --skill handoff --skill teach --skill writing-great-skills \
+  -g -a claude-code -y
+```
+- `code-review`를 뺀 이유: 이미 설치된 `code-review`가 **Anthropic 공식 마켓플레이스**(`anthropics/claude-plugins-official`, `~/.claude/plugins/marketplaces/claude-plugins-official/plugins/code-review`)에서 온 1st-party 스킬이라 이름이 정확히 겹침 — 두 스킬이 공존하면 호출 시 어느 쪽이 트리거될지 모호해짐.
+- `tdd`는 이름 충돌은 없지만 기존 `superpowers:test-driven-development`와 기능이 겹친다 — 두 TDD 스킬이 서로 다른 규율을 요구할 수 있으니 동시 트리거 시 주의.
+- `diagnosing-bugs`/`triage`도 `superpowers:systematic-debugging`, gstack `investigate`와 기능 겹침(이름 충돌 아님).
+
+**vercel-labs/agent-skills — 전체 9개 설치**:
+```sh
+npx skills@latest add vercel-labs/agent-skills --skill '*' -g -a claude-code -y
+```
+설치분: `vercel-composition-patterns`, `deploy-to-vercel`, `vercel-react-best-practices`, `vercel-react-native-skills`, `vercel-react-view-transitions`, `vercel-cli-with-tokens`, `vercel-optimize`, `web-design-guidelines`, `writing-guidelines`. 이름 충돌 없음.
+
+⚠️ **Med Risk 3개** (설치 스크립트의 Snyk 스캔 결과, 악성 아님 — 권한 범위가 넓다는 뜻):
+- `vercel-cli-with-tokens` — `VERCEL_TOKEN` 등 환경변수를 읽어 Vercel CLI를 직접 실행(토큰 접근 + 쉘 실행).
+- `web-design-guidelines`, `writing-guidelines` — 실행할 때마다 외부 URL에서 최신 가이드라인을 fetch(매 실행 네트워크 아웃바운드, 원격 콘텐츠에 의존).
+- 스킬은 샌드박스 없이 에이전트와 동일한 권한(Bash/WebFetch 등)으로 실행되므로, 자동 트리거 시 토큰 출처와 요청 대상을 인지하고 사용할 것.
 
 ---
 
@@ -168,6 +199,7 @@ iCloud `claude/guides`에서 가져온 인프라·MCP·워크플로우 설정 �
   (Claude에게 "claude code 셋업 문서 동기화해줘"라고 해도 됨.)
 
 ## 의사결정 로그
+- 2026-07-02: **Matt Pocock Skills**(19개, `code-review` 제외)·**Vercel React Best Practices**(vercel-labs/agent-skills 전체 9개) 설치(§5-3). 설치 전 GitHub API로 두 레포 구조를 직접 대조해 이름 충돌 검증 — `code-review`가 Anthropic 공식 마켓플레이스 1st-party 스킬임을 확인하고 제외, `tdd`/`diagnosing-bugs`/`triage`는 이름 충돌 없지만 superpowers·gstack과 기능 겹침 인지. vercel-cli-with-tokens·web-design-guidelines·writing-guidelines는 설치 스크립트 Snyk 스캔에서 Med Risk(토큰 접근/매 실행 외부 fetch) — 사용 시 주의.
 - 2026-06-18: gstack은 플러그인이 아니라 단일 git repo(`garrytan/gstack`)에서 온
   standalone 스킬 묶음임을 확인 → 플러그인 표와 분리해 별도 섹션으로 기록.
 - 2026-06-18: gstack 설치 명령을 iCloud `guides/ai` 가이드로 교차검증해 "검증됨"으로 승격(이전엔 inferred).
