@@ -1,9 +1,9 @@
 ---
 type: project
 title: Claude Code 환경 셋업 (스킬·플러그인 온보딩)
-summary: 다른 환경에서 현재 Claude Code 환경을 재현하기 위한 온보딩 체크리스트 — 플러그인 4개, gstack 스킬 스위트, MCP 커넥터, mattpocock/vercel 스킬 팩, 트러블슈팅, 설치 명령.
+summary: 다른 환경에서 현재 Claude Code 환경을 재현하기 위한 온보딩 체크리스트 — 플러그인 4개, gstack 스킬 스위트, MCP 커넥터, mattpocock/vercel 스킬 팩, Playwright 공식 MCP, 트러블슈팅, 설치 명령.
 created: 2026-06-18
-updated: 2026-07-02
+updated: 2026-07-03
 visibility: private
 status: active
 tags: [meta, claude-code, onboarding, setup, sync]
@@ -89,11 +89,18 @@ claude.ai 계정에 연동된 MCP 서버들(도구로 노출됨). 새 환경에�
 | 도구 | 언제/왜 | 설치 |
 |---|---|---|
 | **graphify** ⭐ | **입사 직후 낯선 코드베이스 빠른 파악** — 폴더(코드·문서·논문)를 지식그래프로(커뮤니티 탐지·god node·경로/explain 질의). 위키 provenance(EXTRACTED/INFERRED/AMBIGUOUS)·GIGO 철학과 정렬 | `uv tool install graphifyy` → `graphify install` (레포 한정: `graphify install --project`) |
+| **Playwright 공식 MCP (Test MCP server)** ⭐ | **E2E 테스트 작성·디버깅** — Planner·Generator·Healer 에이전트가 스펙 생성/자가치유까지 지원. gstack `browse`/`qa`보다 E2E 코드 작성·실패 디버깅에 특화 | `npx playwright init-agents --loop=claude --prompts` (프로젝트 루트에서 `.mcp.json`·`.claude/agents`·`.claude/prompts`·`specs/` 생성) |
 | PPTX / PDF Skills | 보고서·슬라이드 자동 생성 | `npx skills add skills-ai/presentation-tools` |
 
 > Matt Pocock Skills·Vercel React Best Practices는 **설치 완료** → §5-3으로 이동.
 
 > **graphify 주의점** (도입 전 확인): ⓐ Python + `uv`(권장) 필요 — Mac에선 plain `pip` 피할 것. ⓑ 의미 추출(semantic)은 LLM 토큰 비용 발생, 큰 레포는 서브에이전트 병렬 처리. ⓒ gstack의 `gbrain`(코드 지식 레이어)과 **기능이 일부 중복** → 입사 환경에서 둘 중 무엇을 쓸지 한 번 비교. ⓓ repo: `safishamsi/graphify`, PyPI 패키지명은 `graphifyy`(y 두 개), CLI는 `graphify`. 스킬은 `~/.claude/skills/graphify/`에 등록됨. 분석 근거: 4개 skills 레포 분석(2026-06-20 대화) (분석만, 미설치 상태).
+
+> **Playwright 공식 MCP 검증 근거**: `estate-web` 프로젝트에서 실사용(2026-07-03, [PR #41](https://github.com/Jin-dev92/estate-web/pull/41) 도입 → [PR #43](https://github.com/Jin-dev92/estate-web/pull/43) Generator 에이전트로 인증 가드 E2E 작성). 별도 npm 패키지가 아니라 **Playwright 자체에 내장된 기능** — `init-agents`가 생성하는 `.mcp.json`은 `playwright-test` 서버 하나만 등록:
+> ```json
+> { "mcpServers": { "playwright-test": { "command": "npx", "args": ["playwright", "run-test-mcp-server"] } } }
+> ```
+> 이 항목은 **프로젝트 로컬(`.mcp.json`) 스코프**라 이 문서(글로벌 환경 복원)의 §1~§5-3과는 성격이 다름 — 여기엔 "범용 추천"으로만 기재, 실제 등록은 프로젝트마다 위 명령으로 개별 수행. estate-web 쪽 상세 사용 규칙(Healer 리뷰 필수·fixme 머지 금지 등)은 해당 레포 `AGENTS.md`/`docs/test/playwright-agents-review.md` 참고 (이 위키엔 미반입 — 프로젝트 전용 컨벤션).
 
 ---
 
@@ -199,6 +206,7 @@ iCloud `claude/guides`에서 가져온 인프라·MCP·워크플로우 설정 �
   (Claude에게 "claude code 셋업 문서 동기화해줘"라고 해도 됨.)
 
 ## 의사결정 로그
+- 2026-07-03: **Playwright 공식 MCP(Test MCP server)**를 §5에 범용 추천으로 추가. `estate-web` 실사용(PR #41 도입, PR #43 Generator로 E2E 작성) 결과 E2E 테스트 작성·디버깅에 유용해 검증됨. npm 패키지 설치가 아니라 Playwright 내장 `init-agents` 명령으로 프로젝트별 생성되는 **프로젝트 로컬 스코프**라 §3(계정 MCP)이 아닌 §5(추천 확장 도구)에 기재 — 실제 등록 명령·상세 컨벤션은 각 프로젝트에서 개별 수행.
 - 2026-07-02: **Matt Pocock Skills**(19개, `code-review` 제외)·**Vercel React Best Practices**(vercel-labs/agent-skills 전체 9개) 설치(§5-3). 설치 전 GitHub API로 두 레포 구조를 직접 대조해 이름 충돌 검증 — `code-review`가 Anthropic 공식 마켓플레이스 1st-party 스킬임을 확인하고 제외, `tdd`/`diagnosing-bugs`/`triage`는 이름 충돌 없지만 superpowers·gstack과 기능 겹침 인지. vercel-cli-with-tokens·web-design-guidelines·writing-guidelines는 설치 스크립트 Snyk 스캔에서 Med Risk(토큰 접근/매 실행 외부 fetch) — 사용 시 주의.
 - 2026-06-18: gstack은 플러그인이 아니라 단일 git repo(`garrytan/gstack`)에서 온
   standalone 스킬 묶음임을 확인 → 플러그인 표와 분리해 별도 섹션으로 기록.
