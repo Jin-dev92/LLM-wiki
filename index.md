@@ -3,7 +3,7 @@ type: moc
 title: Index
 summary: 위키의 모든 페이지를 한곳에 모은 마스터 카탈로그. /ingest 시 자동 갱신.
 created: 2026-06-18
-updated: 2026-06-30
+updated: 2026-07-05
 visibility: private
 tags: [index]
 ---
@@ -30,6 +30,9 @@ tags: [index]
 - [[agentic-context-platform]] — 자산 메타데이터를 자산화해 사람·AI 에이전트에 동일 컨텍스트를 공급하는 플랫폼(OpenMetadata·lineage·SKILL).
 - [[narrative-momentum-strategy]] — 뉴스/공시를 서사→테마→종목 점수(누적·승수)로 변환해 재료 직후 모멘텀을 잡는 퀀트 전략(6단계).
 - [[multi-strategy-regime-diversification]] — 변동성 레짐마다 맞는 전략이 달라 단일 스킬 의존은 위험. 주간 전략별 손익 추적·교체.
+- [[redis-cluster-crossslot-prevention]] — Redis Cluster 멀티키 연산은 해시태그({})로 슬롯을 고정해야 CROSSSLOT 에러를 피한다.
+- [[redis-mandatory-ttl-and-cache-invalidation]] — 캐시 쓰기엔 항상 TTL, 원본 mutation 시엔 관련 캐시 키 DEL.
+- [[redis-connection-management-via-di]] — Redis 연결은 서비스별 직접 관리 대신 PrismaService처럼 DI 싱글턴(RedisModule)으로.
 
 ## sources
 - [[sources/llm-agents/building-effective-agents]] — Anthropic 실용 에이전트 구축 가이드 (web).
@@ -44,12 +47,14 @@ tags: [index]
 - [[sources/career/resume-recruiter-guide]] — 채용담당자 관점 이력서 개선 가이드 (local).
 - [[sources/career/ai-experience-on-resume-thinklighthouse]] — 생각등대, 이력서 AI 경험 표현 3원칙+복붙 문구 (youtube).
 - [[sources/quant/claude-code-quant-narrative-momentum]] — 오드연구소, Claude Code 퀀트매매 스킬 비교 + 네러티브 모멘텀 전략 (youtube).
+- [[sources/backend/cc-redis-rule]] — 사용자 작성 Claude Code용 NestJS+Redis Cluster 코딩 룰(CROSSSLOT·TTL·DI) (local).
 
 ## rules
 - [[rules/company/git-pr]] — 팀 Git/PR + 공통 프로세스(문서위치·TDD·justfile) (company).
 - [[rules/stacks/java]] — Java/Spring 백엔드 규칙(QueryDSL·DTO·DDD·Liquibase 등) (stack).
 - [[rules/stacks/nestjs]] — NestJS 일반 규칙(모듈·검증·설정키·트랜잭션, Prisma 기준) (stack).
 - [[rules/stacks/prisma]] — Prisma DB 규칙(cuid·논리삭제·마이그레이션) (stack).
+- [[rules/stacks/redis]] — Redis Cluster 캐시 규칙(해시태그로 CROSSSLOT 방지·TTL 필수·DI 연결관리) (stack).
 - [[rules/stacks/nestjs-test]] — NestJS 테스트 코드 규칙 (stack).
 - [[rules/stacks/frontend]] — React Query+Zustand+TS FE 개발 규칙 (stack).
 - [[rules/stacks/react]] — React 함수형 컴포넌트 베이스 룰 (stack).

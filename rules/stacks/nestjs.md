@@ -15,6 +15,7 @@ source_file: iCloud/claude/docs/team-java-rules.md (NestJS 섹션) + estate-serv
 
 > Tech Stack 기준: NestJS, Prisma(PostgreSQL), JWT/Passport, class-validator, Swagger.
 > DB 세부 규칙은 [[rules/stacks/prisma]] 참조. 테스트는 [[rules/stacks/nestjs-test]] 참조.
+> Redis 캐시 규칙은 [[rules/stacks/redis]] 참조.
 
 ### 핵심 원칙
 
@@ -32,6 +33,7 @@ source_file: iCloud/claude/docs/team-java-rules.md (NestJS 섹션) + estate-serv
 
 env 키·Redis 키 prefix·토픽명·메타데이터 키 등 반복되는 매직 스트링은 의미 있는
 상수/`const enum`으로 추출해 단일 출처로 관리하고 오타를 컴파일 타임에 잡는다.
+(Redis 키 설계 자체의 슬롯/TTL 규칙은 [[rules/stacks/redis]] 참조)
 
 ```ts
 // ✅ GOOD
