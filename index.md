@@ -3,7 +3,7 @@ type: moc
 title: Index
 summary: 위키의 모든 페이지를 한곳에 모은 마스터 카탈로그. /ingest 시 자동 갱신.
 created: 2026-06-18
-updated: 2026-07-05
+updated: 2026-07-06
 visibility: private
 tags: [index]
 ---
@@ -31,8 +31,12 @@ tags: [index]
 - [[narrative-momentum-strategy]] — 뉴스/공시를 서사→테마→종목 점수(누적·승수)로 변환해 재료 직후 모멘텀을 잡는 퀀트 전략(6단계).
 - [[multi-strategy-regime-diversification]] — 변동성 레짐마다 맞는 전략이 달라 단일 스킬 의존은 위험. 주간 전략별 손익 추적·교체.
 - [[redis-cluster-crossslot-prevention]] — Redis Cluster 멀티키 연산은 해시태그({})로 슬롯을 고정해야 CROSSSLOT 에러를 피한다.
-- [[redis-mandatory-ttl-and-cache-invalidation]] — 캐시 쓰기엔 항상 TTL, 원본 mutation 시엔 관련 캐시 키 DEL.
-- [[redis-connection-management-via-di]] — Redis 연결은 서비스별 직접 관리 대신 PrismaService처럼 DI 싱글턴(RedisModule)으로.
+- [[redis-mandatory-ttl-and-cache-invalidation]] — 캐시 쓰기엔 항상 TTL(capped 리스트 포함), 원본 mutation 시엔 관련 캐시 키 DEL, 파생 카운터는 DB COUNT 폴백으로 재구축.
+- [[redis-connection-management-via-di]] — Redis 연결은 서비스별 직접 관리 대신 PrismaService처럼 DI 싱글턴(RedisModule)으로. 단 pub/sub duplicate 커넥션은 OnModuleDestroy에서 직접 정리.
+- [[retry-idempotency-and-backoff]] — 재시도는 멱등+일시적 오류에만(4xx 반려), 지수 백오프+Jitter, 전체 타임아웃 예산.
+- [[bulkhead-semaphore-isolation]] — 불안정 의존성의 동시 실행 수를 상한으로 격리. Node는 세마포어 방식, 수치는 실측 기반.
+- [[circuit-breaker-fail-fast]] — 계속 실패하는 의존성은 호출 차단(fail-fast). 상태 변화 로깅 필수, fallback 설계.
+- [[resilience-policy-composition-order]] — Timeout→Retry→CB→Bulkhead 순 wrap 합성, 의존성별 정책 인스턴스 분리.
 
 ## sources
 - [[sources/llm-agents/building-effective-agents]] — Anthropic 실용 에이전트 구축 가이드 (web).
@@ -48,13 +52,15 @@ tags: [index]
 - [[sources/career/ai-experience-on-resume-thinklighthouse]] — 생각등대, 이력서 AI 경험 표현 3원칙+복붙 문구 (youtube).
 - [[sources/quant/claude-code-quant-narrative-momentum]] — 오드연구소, Claude Code 퀀트매매 스킬 비교 + 네러티브 모멘텀 전략 (youtube).
 - [[sources/backend/cc-redis-rule]] — 사용자 작성 Claude Code용 NestJS+Redis Cluster 코딩 룰(CROSSSLOT·TTL·DI) (local).
+- [[sources/backend/resilience-patterns-team-rules]] — 사용자 작성 장애 대응 팀룰(Retry·Bulkhead·CB, NestJS+cockatiel) + 반입 시 보강 (local).
 
 ## rules
 - [[rules/company/git-pr]] — 팀 Git/PR + 공통 프로세스(문서위치·TDD·justfile) (company).
 - [[rules/stacks/java]] — Java/Spring 백엔드 규칙(QueryDSL·DTO·DDD·Liquibase 등) (stack).
 - [[rules/stacks/nestjs]] — NestJS 일반 규칙(모듈·검증·설정키·트랜잭션, Prisma 기준) (stack).
 - [[rules/stacks/prisma]] — Prisma DB 규칙(cuid·논리삭제·마이그레이션) (stack).
-- [[rules/stacks/redis]] — Redis Cluster 캐시 규칙(해시태그로 CROSSSLOT 방지·TTL 필수·DI 연결관리) (stack).
+- [[rules/stacks/redis]] — Redis Cluster 캐시 규칙(해시태그로 CROSSSLOT 방지·TTL 필수·파생 카운터 DB 폴백·DI 연결관리+pub/sub 정리) (stack).
+- [[rules/stacks/resilience]] — 장애 대응 패턴 규칙(멱등+일시 오류만 재시도·벌크헤드 격리·서킷 브레이커 로깅 필수·조합 순서, cockatiel/Resilience4j) (stack).
 - [[rules/stacks/nestjs-test]] — NestJS 테스트 코드 규칙 (stack).
 - [[rules/stacks/frontend]] — React Query+Zustand+TS FE 개발 규칙 (stack).
 - [[rules/stacks/react]] — React 함수형 컴포넌트 베이스 룰 (stack).

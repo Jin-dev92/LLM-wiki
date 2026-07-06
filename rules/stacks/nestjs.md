@@ -15,7 +15,7 @@ source_file: iCloud/claude/docs/team-java-rules.md (NestJS 섹션) + estate-serv
 
 > Tech Stack 기준: NestJS, Prisma(PostgreSQL), JWT/Passport, class-validator, Swagger.
 > DB 세부 규칙은 [[rules/stacks/prisma]] 참조. 테스트는 [[rules/stacks/nestjs-test]] 참조.
-> Redis 캐시 규칙은 [[rules/stacks/redis]] 참조.
+> Redis 캐시 규칙은 [[rules/stacks/redis]], 외부 의존성 장애 대응은 [[rules/stacks/resilience]] 참조.
 
 ### 핵심 원칙
 
