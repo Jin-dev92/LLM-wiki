@@ -3,7 +3,7 @@ type: project
 title: Claude Code 환경 셋업 (스킬·플러그인 온보딩)
 summary: 다른 환경에서 현재 Claude Code 환경을 재현하기 위한 온보딩 체크리스트 — 플러그인 4개, gstack 스킬 스위트, MCP 커넥터, mattpocock/vercel 스킬 팩, Playwright 공식 MCP, 트러블슈팅, 설치 명령.
 created: 2026-06-18
-updated: 2026-07-03
+updated: 2026-07-06
 visibility: private
 status: active
 tags: [meta, claude-code, onboarding, setup, sync]
@@ -54,7 +54,7 @@ ios-*·investigate·spec·share-tech 등)은 전부 **gstack** 한 레포에서 
 
 - repo: `https://github.com/garrytan/gstack.git`
 - 설치 위치: `~/.claude/skills/gstack`
-- 현재 버전: `1.48.0.0` (`~/.claude/skills/gstack/VERSION`)
+- 버전은 고정하지 않는다 — 항상 최신(`/gstack-upgrade` 또는 재클론)으로 유지. 현재 설치본 확인: `cat ~/.claude/skills/gstack/VERSION`
 
 **설치** (iCloud 가이드로 검증됨):
 ```sh
@@ -206,6 +206,7 @@ iCloud `claude/guides`에서 가져온 인프라·MCP·워크플로우 설정 �
   (Claude에게 "claude code 셋업 문서 동기화해줘"라고 해도 됨.)
 
 ## 의사결정 로그
+- 2026-07-06: `/wiki-review` 점검 결과 반영 — gstack 버전을 특정 숫자로 고정 표기하지 않기로 결정(항상 최신 유지, 확인 명령만 남김). 버전 문자열을 박아두면 금방 stale해진다는 지난 점검 결과 반영.
 - 2026-07-03: **Playwright 공식 MCP(Test MCP server)**를 §5에 범용 추천으로 추가. `estate-web` 실사용(PR #41 도입, PR #43 Generator로 E2E 작성) 결과 E2E 테스트 작성·디버깅에 유용해 검증됨. npm 패키지 설치가 아니라 Playwright 내장 `init-agents` 명령으로 프로젝트별 생성되는 **프로젝트 로컬 스코프**라 §3(계정 MCP)이 아닌 §5(추천 확장 도구)에 기재 — 실제 등록 명령·상세 컨벤션은 각 프로젝트에서 개별 수행.
 - 2026-07-02: **Matt Pocock Skills**(19개, `code-review` 제외)·**Vercel React Best Practices**(vercel-labs/agent-skills 전체 9개) 설치(§5-3). 설치 전 GitHub API로 두 레포 구조를 직접 대조해 이름 충돌 검증 — `code-review`가 Anthropic 공식 마켓플레이스 1st-party 스킬임을 확인하고 제외, `tdd`/`diagnosing-bugs`/`triage`는 이름 충돌 없지만 superpowers·gstack과 기능 겹침 인지. vercel-cli-with-tokens·web-design-guidelines·writing-guidelines는 설치 스크립트 Snyk 스캔에서 Med Risk(토큰 접근/매 실행 외부 fetch) — 사용 시 주의.
 - 2026-06-18: gstack은 플러그인이 아니라 단일 git repo(`garrytan/gstack`)에서 온

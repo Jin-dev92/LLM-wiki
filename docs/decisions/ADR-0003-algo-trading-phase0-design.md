@@ -54,5 +54,5 @@ bar 단위로 `DataProvider → Strategy.generate_signal → OrderExecutor`를 �
 
 ## 근거 자료
 - 설계 문서: algo-trading-server-design (사용자 제공, Claude Code 인계용)
-- 선행 결정: [[ADR-0002]] (기능별 구조 + uv 툴체인)
+- 선행 결정: [[ADR-0002-quant-server-feature-based-fastapi]] (기능별 구조 + uv 툴체인)
 - 프로젝트 컨벤션: `quant-server/CLAUDE.md`
