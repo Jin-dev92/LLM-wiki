@@ -3,7 +3,7 @@ type: moc
 title: Index
 summary: 위키의 모든 페이지를 한곳에 모은 마스터 카탈로그. /ingest 시 자동 갱신.
 created: 2026-06-18
-updated: 2026-07-06
+updated: 2026-07-13
 visibility: private
 tags: [index]
 ---
@@ -47,6 +47,7 @@ tags: [index]
 - [[sources/claude-code/ai-job-assistant-mcp-playmcp]] — 스티브의 파도타기, Claude Desktop+PlayMCP로 사람인·카카오톡 MCP 붙여 AI 취업비서 만들기 (youtube).
 - [[sources/llm-agents/playwright-e2e-harness-naverpay]] — 네이버페이 FE의 Playwright E2E 하네스 구축 발표 (youtube).
 - [[sources/llm-agents/context-provider-naver-d2]] — NAVER 플레이스, 사람·AI Agent 통합 Context Provider 구축 발표 (youtube).
+- [[sources/llm-agents/squad-multi-ai-orchestrator]] — Claude Code·Codex CLI 등 여러 AI CLI를 로컬 SQLite 작업·메시지로 연결하는 Squad 공식 README 요약 (web).
 - [[sources/resume/resume-fullstack-2026]] — 김의진 이력서, 경력·성과·스택·자격증 (pdf).
 - [[sources/career/resume-recruiter-guide]] — 채용담당자 관점 이력서 개선 가이드 (local).
 - [[sources/career/ai-experience-on-resume-thinklighthouse]] — 생각등대, 이력서 AI 경험 표현 3원칙+복붙 문구 (youtube).
@@ -72,11 +73,15 @@ tags: [index]
 
 ## guide
 - [[guide/ai/claude-code-setup]] — Claude Code 환경 온보딩(플러그인·gstack 스킬·MCP·추천도구) + 동기화.
+- [[guide/ai/squad-setup]] — Squad 설치부터 Codex manager·Claude worker·Codex inspector 운영, 복구, 제거까지의 복원용 가이드.
 - [[guide/ai/audit-logging-setup]] — 감사 로깅 훅 cc-audit-hooks 복원(clone→install.py→검증→리포트).
 - `guide/ai/claude-global.md` — 글로벌 `~/.claude/CLAUDE.md` 사본(원문 보관).
 - `guide/mcp/` — Serena · AWS MFA+MySQL MCP 설정 가이드(원문 보관).
 - `guide/aws/` — RDS 스냅샷 → 로컬 MySQL 복구 가이드(원문 보관).
 - `guide/github-actions/` — Claude PR 자동 리뷰 워크플로우 설정·요약(원문 보관).
+
+## plans
+- [[docs/plans/2026-07-13-squad-installation-guide]] — Squad 설치·사용 가이드의 범위, 근거, 검증 기준.
 
 ## decisions (ADR)
 - `docs/decisions/ADR-0001-keep-gstack-superpowers-over-agent-skills.md` — Claude Code 기반을 gstack+superpowers로 유지(agent-skills 전환 안 함) + 3종 cherry-pick. flip condition 포함.

@@ -3,7 +3,7 @@ type: note
 title: Agentic Workflow 5가지 패턴
 summary: Anthropic이 정리한 재사용 가능한 5패턴(Prompt Chaining·Routing·Parallelization·Orchestrator-Workers·Evaluator-Optimizer). 단순한 것부터 조합이 안정적.
 created: 2026-06-18
-updated: 2026-06-18
+updated: 2026-07-13
 visibility: private
 provenance: extracted
 tags: [llm, agent, workflow, pattern]
@@ -22,4 +22,6 @@ LLM 기반 시스템에는 재사용 가능한 5가지 워크플로 패턴이 �
 ## 관련
 - [[workflow-vs-agent]]
 - [[self-improvement-loop]] — Evaluator-Optimizer의 평가자를 결정론적 검증(테스트)으로 대체한 실전 적용
+- [[guide/ai/squad-setup]] — Codex manager·Claude worker·Codex inspector로 두 패턴을 조합한 로컬 운영 가이드
 - 출처: [[sources/llm-agents/building-effective-agents]]
+- 출처: [[sources/llm-agents/squad-multi-ai-orchestrator]]
