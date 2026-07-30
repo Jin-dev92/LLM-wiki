@@ -20,8 +20,8 @@ JSONL로 남기고, 위험한 Bash 명령을 실행 전 차단하며, 사용 현
 
 ## 1. 설치 (복원)
 ```sh
-git clone https://github.com/Jin-dev92/cc-audit-hooks.git ~/WebstormProjects/cc-audit-hooks
-cd ~/WebstormProjects/cc-audit-hooks
+git clone https://github.com/Jin-dev92/cc-audit-hooks.git ~/orca/workspaces/cc-audit-hooks
+cd ~/orca/workspaces/cc-audit-hooks
 python3 install.py
 ```
 - `install.py`가 하는 일(멱등):
@@ -32,7 +32,7 @@ python3 install.py
 
 ## 2. 검증
 ```sh
-cd ~/WebstormProjects/cc-audit-hooks
+cd ~/orca/workspaces/cc-audit-hooks
 python3 -m unittest discover -s hooks/audit/tests   # 29 tests, all pass
 python3 -c "import json;print(list(json.load(open('$HOME/.claude/settings.json'))['hooks'].keys()))"
 # -> ['PreToolUse', 'PostToolUse', 'UserPromptSubmit'] (기존 WebFetch 훅과 공존)
