@@ -36,7 +36,7 @@ Always respond in Korean (한국어).
 ---
 
 ## 개인 위키 참조 (llm-wiki)
-- 경로: `/Users/kim-uijin/WebstormProjects/llm-wiki`
+- 경로: `/Users/kim-uijin/orca/workspaces/llm-wiki`
 - 다른 프로젝트에서 내 축적 지식이 필요하면 파일시스템을 뒤지지 말고 이 경로를 직접 본다.
 - 읽는 순서는 **계층 검색**: `index.md`(마스터 카탈로그) → 노트의 제목/태그/summary → 필요한 노트만 본문 열기. (탐색 비용·토큰 절약)
 - 노트 기본값은 `visibility: private`다. 다른 프로젝트로 내용을 **복사·이식하지 말 것** — 공유가 필요하면 위키의 export(`wiki-publish`)나 `wiki-apply`로만 반출한다.

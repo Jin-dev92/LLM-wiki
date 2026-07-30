@@ -126,8 +126,8 @@ Claude Code 프롬프트·도구 호출을 JSONL로 로깅하고 위험 Bash 명
 
 **복원**:
 ```sh
-git clone https://github.com/Jin-dev92/cc-audit-hooks.git ~/WebstormProjects/cc-audit-hooks
-cd ~/WebstormProjects/cc-audit-hooks && python3 install.py
+git clone https://github.com/Jin-dev92/cc-audit-hooks.git ~/orca/workspaces/cc-audit-hooks
+cd ~/orca/workspaces/cc-audit-hooks && python3 install.py
 ```
 - `install.py`가 `~/.claude/hooks/audit/` 배치 + `settings.json`의 UserPromptSubmit/PreToolUse/PostToolUse에 **기존 보존하며** 병합 등록(§5-1의 SDD WebFetch 훅과 공존). 멱등.
 - 로그: `~/.claude/logs/audit/*.jsonl`(0600) + `index.db`. 리포트: `python3 ~/.claude/hooks/audit/audit_report.py`.
