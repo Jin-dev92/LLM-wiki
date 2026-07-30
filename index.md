@@ -3,7 +3,7 @@ type: moc
 title: Index
 summary: 위키의 모든 페이지를 한곳에 모은 마스터 카탈로그. /ingest 시 자동 갱신.
 created: 2026-06-18
-updated: 2026-07-06
+updated: 2026-07-30
 visibility: private
 tags: [index]
 ---
@@ -61,6 +61,7 @@ tags: [index]
 - [[rules/stacks/prisma]] — Prisma DB 규칙(cuid·논리삭제·마이그레이션) (stack).
 - [[rules/stacks/redis]] — Redis Cluster 캐시 규칙(해시태그로 CROSSSLOT 방지·TTL 필수·파생 카운터 DB 폴백·DI 연결관리+pub/sub 정리) (stack).
 - [[rules/stacks/resilience]] — 장애 대응 패턴 규칙(멱등+일시 오류만 재시도·벌크헤드 격리·서킷 브레이커 로깅 필수·조합 순서, cockatiel/Resilience4j) (stack).
+- [[rules/stacks/observability]] — APM 관측 규칙(증설·축소 판단 P0 계측 8종·스케일 방향 결정 트리·부하 테스트 기준선·scale-in 규칙 + 트레이싱/프로파일링 진단 계층). Node.js+PostgreSQL+ECS 예시 (stack).
 - [[rules/stacks/nestjs-test]] — NestJS 테스트 코드 규칙 (stack).
 - [[rules/stacks/frontend]] — React Query+Zustand+TS FE 개발 규칙 (stack).
 - [[rules/stacks/react]] — React 함수형 컴포넌트 베이스 룰 (stack).
