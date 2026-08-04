@@ -3,7 +3,7 @@ type: moc
 title: Index
 summary: 위키의 모든 페이지를 한곳에 모은 마스터 카탈로그. /ingest 시 자동 갱신.
 created: 2026-06-18
-updated: 2026-07-30
+updated: 2026-08-04
 visibility: private
 tags: [index]
 ---
@@ -37,6 +37,9 @@ tags: [index]
 - [[bulkhead-semaphore-isolation]] — 불안정 의존성의 동시 실행 수를 상한으로 격리. Node는 세마포어 방식, 수치는 실측 기반.
 - [[circuit-breaker-fail-fast]] — 계속 실패하는 의존성은 호출 차단(fail-fast). 상태 변화 로깅 필수, fallback 설계.
 - [[resilience-policy-composition-order]] — Timeout→Retry→CB→Bulkhead 순 wrap 합성, 의존성별 정책 인스턴스 분리.
+- [[keyword-vs-semantic-retrieval]] — BM25는 단어가 겹쳐야 점수가 난다(우회 표현엔 0점). 벡터가 7배 메우지만 실력 차가 크면 RRF 융합은 손해.
+- [[eval-set-is-also-under-test]] — 평가셋도 검증 대상. 베끼기 방지 제약이 과교정을 일으켜 성능이 7분의 1로 측정되고 결론이 뒤집혔던 사례.
+- [[rag-value-at-small-corpus]] — 전체가 컨텍스트에 들어가는 규모에선 RAG는 정확도(1문항)가 아니라 비용(19배)의 장치. 질문 빈도가 판단 기준.
 
 ## sources
 - [[sources/llm-agents/building-effective-agents]] — Anthropic 실용 에이전트 구축 가이드 (web).
@@ -70,6 +73,7 @@ tags: [index]
 ## projects
 - [[projects/estate-server]] — NestJS+Prisma+Kafka 플랫폼 백엔드 (최신 컨벤션 기준).
 - [[projects/fanddle-server]] — Fanddle 플랫폼 백엔드 (Express+Sequelize 모노레포).
+- [[projects/rag-wiki]] — 이 위키를 코퍼스로 RAG를 직접 구현하며 학습. 평가셋 우선, 6계단 벤치마크 기록.
 
 ## guide
 - [[guide/ai/claude-code-setup]] — Claude Code 환경 온보딩(플러그인·gstack 스킬·MCP·추천도구) + 동기화.
