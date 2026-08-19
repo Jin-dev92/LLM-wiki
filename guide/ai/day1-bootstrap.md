@@ -78,20 +78,28 @@ tags: [meta, claude-code, onboarding, setup, bootstrap]
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 brew install git node python3 gh yt-dlp jq
-
-# 이 문서가 쓰는 작업 루트 — 없으면 만든다
-mkdir -p ~/work
 ```
 
-> **`~/work`는 이 문서가 정한 작업 루트다.** 클론한 레포(`llm-wiki`·`agent-skills`·`cc-audit-hooks`)가
-> 여기 들어간다. 다른 경로를 쓰려면 이 문서의 `~/work`를
-> 일괄 치환하고, **Step 8의 글로벌 CLAUDE.md 안 "개인 위키 참조" 경로도 같이 바꾼다**(두 곳이 맞아야 한다).
-> 개인 PC는 `~/orca/workspaces/`를 쓰지만, 그건 Orca 앱이 만드는 구조라 회사 PC에는 없을 수 있다.
+**Orca 앱을 설치한다.** 워크트리·터미널 관리를 Orca로 하고, 작업 루트도 Orca 구조를 따른다.
+앱을 깔면 `orca` CLI가 `/usr/local/bin/orca` → 앱 번들로 심볼릭 링크되므로 별도 설치가 없다.
+
+```sh
+orca --version                 # 앱 설치 후 CLI가 잡히는지 확인
+mkdir -p ~/orca/workspaces     # 작업 루트 (앱이 안 만들어 놨다면)
+```
+
+> **작업 루트는 개인 PC와 동일하게 `~/orca/workspaces/`를 쓴다.** 클론한 레포
+> (`llm-wiki`·`agent-skills`·`cc-audit-hooks`)가 여기 들어간다.
+>
+> 경로를 개인 PC와 맞추면 두 기기에서 같은 명령·같은 습관이 그대로 통하고, Step 8의 글로벌
+> CLAUDE.md "개인 위키 참조" 경로도 개인 PC 버전과 동일해진다. 경로를 바꾸려면 이 문서와
+> **Step 8 블록 안 경로를 함께** 고친다(두 곳이 맞아야 한다).
 
 - `yt-dlp` — 유튜브 자막 추출용(과거 `watch` 플러그인을 대체). 회사 PC에선 선택.
 - `gh` — `gh auth login`으로 **회사 계정** 인증. `gh auth status`로 활성 계정을 반드시 확인한다(개인 계정이 활성이면 사내 코드가 개인 레포로 나갈 수 있다).
+- Orca — 워크트리·터미널 오케스트레이션. Step 8의 글로벌 CLAUDE.md가 `orca-cli`·`orchestration` 스킬을 전제하므로 설치해 둔다.
 
-**검증**: `git --version && node -v && python3 -V && gh --version`
+**검증**: `git --version && node -v && python3 -V && gh --version && orca --version`
 
 ---
 
@@ -162,7 +170,7 @@ git clone --depth 1 https://github.com/mvanhorn/last30days-skill.git ~/.claude/s
 `addyosmani/agent-skills` 전체로 전환하지 않고 공백을 메우는 3개만 가져온다.
 
 ```sh
-git clone --depth 1 https://github.com/addyosmani/agent-skills.git ~/work/agent-skills
+git clone --depth 1 https://github.com/addyosmani/agent-skills.git ~/orca/workspaces/agent-skills
 for s in documentation-and-adrs doubt-driven-development source-driven-development; do
   cp -R "$HOME/work/agent-skills/skills/$s" ~/.claude/skills/
 done
@@ -208,8 +216,8 @@ npx skills@latest add mattpocock/skills \
 레포는 **public**이라 회사 PC에서 개인 GitHub 인증 없이 clone된다.
 
 ```sh
-git clone https://github.com/Jin-dev92/cc-audit-hooks.git ~/work/cc-audit-hooks
-cd ~/work/cc-audit-hooks && python3 install.py
+git clone https://github.com/Jin-dev92/cc-audit-hooks.git ~/orca/workspaces/cc-audit-hooks
+cd ~/orca/workspaces/cc-audit-hooks && python3 install.py
 ```
 
 - `install.py`가 `~/.claude/hooks/audit/` 배치 + `settings.json`의 UserPromptSubmit/PreToolUse/PostToolUse에 **기존 보존하며** 병합 등록한다(5-1의 SDD 훅과 공존). 멱등.
@@ -235,6 +243,7 @@ rtk init -g --no-patch     # settings.json을 자동 패치하지 말고 지시�
 rtk가 먼저 돌아 명령이 `rtk ...` 형태로 감싸지면 감사 훅의 위험 패턴 매칭이 빗나갈 수 있다.
 
 - `~/.claude/settings.json`의 `PreToolUse` 배열에서 **audit 훅이 rtk 훅보다 앞에 오도록** 직접 배치한다.
+- 이 시점의 `PreToolUse`에는 이미 셋이 등록돼 있다 — SDD(matcher `WebFetch`), audit(matcher 없음), Orca(matcher `*`). rtk를 넣으면 넷이 되므로 배열 순서를 눈으로 확인하고 넣는다.
 - 출력만 압축하면 되므로, 가능하면 rtk 훅의 matcher를 `Bash`로 좁힌다.
 
 **검증 (반드시 수행)** — 감사 훅의 차단이 rtk 설치 후에도 살아 있는지 확인한다.
@@ -308,7 +317,7 @@ Always respond in Korean (한국어).
 - 위 위임에 감독·완료 대기·DAG·결정 게이트가 필요 → **orchestration**
 
 ## 개인 위키 참조 (llm-wiki)
-- 경로: `~/work/llm-wiki`
+- 경로: `~/orca/workspaces/llm-wiki`
 - 축적 지식이 필요하면 파일시스템을 뒤지지 말고 이 경로를 직접 본다.
 - 읽는 순서는 **계층 검색**: `index.md`(마스터 카탈로그) → 노트의 제목/태그/summary → 필요한 노트만 본문 열기.
 - 스택 룰은 `rules/stacks/`, 공통 프로세스 baseline은 `rules/company/git-pr.md`.
@@ -368,7 +377,7 @@ EOF_CLAUDEMD
 룰·노트는 이 문서에 들어 있지 않다. **위키 레포를 클론해서 통째로 가져온다.**
 
 ```sh
-git clone https://github.com/Jin-dev92/LLM-wiki.git ~/work/llm-wiki
+git clone https://github.com/Jin-dev92/LLM-wiki.git ~/orca/workspaces/llm-wiki
 ```
 
 `Jin-dev92/LLM-wiki`는 **private 레포**라 개인 GitHub 인증이 필요하다.
@@ -395,7 +404,7 @@ git clone https://github.com/Jin-dev92/LLM-wiki.git ~/work/llm-wiki
 ### 글로벌 CLAUDE.md의 경로를 맞춘다
 
 Step 8에서 배치한 `~/.claude/CLAUDE.md`의 "팀 스택 룰 참조" 절이 이 경로를 가리켜야 한다.
-Step 8 블록은 `~/work/llm-wiki` 기준으로 적혀 있으니, 다른 곳에 클론했다면 함께 고친다.
+Step 8 블록은 `~/orca/workspaces/llm-wiki` 기준으로 적혀 있으니, 다른 곳에 클론했다면 함께 고친다.
 
 ```sh
 grep -n 'llm-wiki' ~/.claude/CLAUDE.md    # 경로가 실제 클론 위치와 같은지 확인
@@ -429,10 +438,11 @@ cat ~/.claude/plugins/installed_plugins.json   # 플러그인 3개
 cat ~/.claude/skills/gstack/VERSION            # gstack 설치 확인
 ls ~/.claude/skills                            # ponytail·last30days·cherry-pick 3종 존재
 rtk --version                                  # rtk 설치 확인
+orca --version                                 # Orca CLI 확인
 python3 -c "import json;print(list(json.load(open('$HOME/.claude/settings.json')).get('hooks',{}).keys()))"
 ls ~/.claude/logs/audit/                       # 감사 로그 생성 여부
 head -1 ~/.claude/CLAUDE.md                    # "Always respond in Korean"
-ls ~/work/llm-wiki/rules/stacks/               # 스택 룰 (위키 클론 확인)
+ls ~/orca/workspaces/llm-wiki/rules/stacks/    # 스택 룰 (위키 클론 확인)
 ```
 
 Claude Code 세션에서:
