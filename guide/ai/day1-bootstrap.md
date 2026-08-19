@@ -386,7 +386,7 @@ git clone https://github.com/Jin-dev92/LLM-wiki.git ~/work/llm-wiki
 
 | 자산 | 위치 | 쓰임 |
 |---|---|---|
-| 스택 룰 12개 | `rules/stacks/`, `rules/company/` | 레포 CLAUDE.md 생성의 재료 |
+| 스택 룰 전체 | `rules/stacks/`, `rules/company/` | 레포 CLAUDE.md 생성의 재료 (개수는 고정 표기하지 않는다 — 계속 늘어난다) |
 | 위키 전용 슬래시 커맨드 | `.claude/commands/` | `ingest`·`wiki-apply`·`wiki-harvest`·`wiki-review` |
 | 영구 노트 | `notes/` | 룰의 배경·이유 (`[[링크]]`로 연결돼 있다) |
 
