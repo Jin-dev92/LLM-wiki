@@ -429,6 +429,11 @@ grep -n 'llm-wiki' ~/.claude/CLAUDE.md    # 경로가 실제 클론 위치와 �
 - Notion / Gmail / Google Calendar / Google Drive — 각 도구 첫 호출 시 `authenticate` → `complete_authentication`
 - 코드용: Playwright Test MCP — `npx playwright init-agents --loop=claude --prompts` (프로젝트 로컬 스코프라 레포마다 개별 실행)
 
+> ⛔ **DB에 직접 붙는 MCP 커넥터는 연결하지 않는다.**
+> DB 이관은 사람이 수행하기로 했고, MCP는 Claude에게 DB 직접 접근을 주는 유일한 경로다.
+> 개인 PC 카탈로그(`claude-code-setup.md` §3·§6)에 AWS MFA + MySQL MCP 설정 가이드가
+> 링크돼 있으나 **회사 PC에서는 설치 대상이 아니다.**
+
 ---
 
 ## Step 11 — 검증 체크리스트
@@ -463,6 +468,7 @@ Claude Code 세션에서:
 | `taste-skill`, vercel 9종, `web-design-guidelines` | FE 디자인 계열 — 백엔드 포지션에서 사용처 없음 |
 | `caveman` | 제외(2026-08-19). 응답 문체 압축은 회사 PC에서 불필요 |
 | Serena MCP | 제외(2026-08-19). LSP 코드 인텔리전스 — 회사 PC 셋업에서 제외 |
+| DB 직결 MCP 커넥터 | 제외. Claude에게 DB 직접 접근을 주는 경로라 "DB 이관은 사람이 수행" 원칙과 충돌한다 |
 
 ## 갱신 규칙
 개인 PC에서 플러그인·스킬을 추가/제거하면 `guide/ai/claude-code-setup.md`(카탈로그)를 먼저
