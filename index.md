@@ -3,7 +3,7 @@ type: moc
 title: Index
 summary: 위키의 모든 페이지를 한곳에 모은 마스터 카탈로그. /ingest 시 자동 갱신.
 created: 2026-06-18
-updated: 2026-08-04
+updated: 2026-08-19
 visibility: private
 tags: [index]
 ---
@@ -40,6 +40,7 @@ tags: [index]
 - [[keyword-vs-semantic-retrieval]] — BM25는 단어가 겹쳐야 점수가 난다(우회 표현엔 0점). 벡터가 7배 메우지만 실력 차가 크면 RRF 융합은 손해.
 - [[eval-set-is-also-under-test]] — 평가셋도 검증 대상. 베끼기 방지 제약이 과교정을 일으켜 성능이 7분의 1로 측정되고 결론이 뒤집혔던 사례.
 - [[rag-value-at-small-corpus]] — 전체가 컨텍스트에 들어가는 규모에선 RAG는 정확도(1문항)가 아니라 비용(19배)의 장치. 질문 빈도가 판단 기준.
+- [[strangler-fig-migration]] — 레거시를 라우팅 계층에서 한 기능씩 신규로 옮겨 고사시키는 전환 패턴. 난점은 라우팅이 아니라 데이터 공존·컷오버 단위·롤백 기준.
 
 ## sources
 - [[sources/llm-agents/building-effective-agents]] — Anthropic 실용 에이전트 구축 가이드 (web).
@@ -58,13 +59,15 @@ tags: [index]
 - [[sources/backend/resilience-patterns-team-rules]] — 사용자 작성 장애 대응 팀룰(Retry·Bulkhead·CB, NestJS+cockatiel) + 반입 시 보강 (local).
 
 ## rules
-- [[rules/company/git-pr]] — 팀 Git/PR + 공통 프로세스(문서위치·TDD·justfile) (company).
+- [[rules/company/git-pr]] — Git/PR + 공통 프로세스 baseline(브랜치 보호·커밋 타입·PR 체크리스트·문서위치·테스트 요건·태스크 러너). 조직 고유 값은 자리표시자, 사내 룰 우선 (company).
 - [[rules/stacks/java]] — Java/Spring 백엔드 규칙(QueryDSL·DTO·DDD·Liquibase 등) (stack).
 - [[rules/stacks/nestjs]] — NestJS 일반 규칙(모듈·검증·설정키·트랜잭션, Prisma 기준) (stack).
 - [[rules/stacks/prisma]] — Prisma DB 규칙(cuid·논리삭제·마이그레이션) (stack).
 - [[rules/stacks/redis]] — Redis Cluster 캐시 규칙(해시태그로 CROSSSLOT 방지·TTL 필수·파생 카운터 DB 폴백·DI 연결관리+pub/sub 정리) (stack).
 - [[rules/stacks/resilience]] — 장애 대응 패턴 규칙(멱등+일시 오류만 재시도·벌크헤드 격리·서킷 브레이커 로깅 필수·조합 순서, cockatiel/Resilience4j) (stack).
 - [[rules/stacks/observability]] — APM 관측 규칙(증설·축소 판단 P0 계측 8종·스케일 방향 결정 트리·부하 테스트 기준선·scale-in 규칙 + 트레이싱/프로파일링 진단 계층). Node.js+PostgreSQL+ECS 예시 (stack).
+- [[rules/stacks/postgres]] — PostgreSQL 규칙, MySQL 이관 관점(식별자 소문자 접힘·타입 매핑·identity 시퀀스·자동 갱신 컬럼 부재·upsert·격리수준 차이) (stack).
+- [[rules/stacks/express-legacy]] — Express 레거시 파악·이관 규칙(읽기 전용 원칙·라우트 인벤토리·미들웨어 체인·이관 단위 판정) (stack).
 - [[rules/stacks/nestjs-test]] — NestJS 테스트 코드 규칙 (stack).
 - [[rules/stacks/frontend]] — React Query+Zustand+TS FE 개발 규칙 (stack).
 - [[rules/stacks/react]] — React 함수형 컴포넌트 베이스 룰 (stack).
@@ -76,6 +79,7 @@ tags: [index]
 - [[projects/rag-wiki]] — 이 위키를 코퍼스로 RAG를 직접 구현하며 학습. 평가셋 우선, 6계단 벤치마크 기록.
 
 ## guide
+- [[guide/ai/day1-bootstrap]] — 새 PC에 파일 하나만 던지면 끝나는 Day-1 세팅 가이드(정책 게이트→도구→플러그인·스킬·훅·rtk→회사용 글로벌 CLAUDE.md 전문→검증).
 - [[guide/ai/claude-code-setup]] — Claude Code 환경 온보딩(플러그인·gstack 스킬·MCP·추천도구) + 동기화.
 - [[guide/ai/audit-logging-setup]] — 감사 로깅 훅 cc-audit-hooks 복원(clone→install.py→검증→리포트).
 - `guide/ai/claude-global.md` — 글로벌 `~/.claude/CLAUDE.md` 사본(원문 보관).
