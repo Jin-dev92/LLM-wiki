@@ -429,10 +429,23 @@ grep -n 'llm-wiki' ~/.claude/CLAUDE.md    # 경로가 실제 클론 위치와 �
 - Notion / Gmail / Google Calendar / Google Drive — 각 도구 첫 호출 시 `authenticate` → `complete_authentication`
 - 코드용: Playwright Test MCP — `npx playwright init-agents --loop=claude --prompts` (프로젝트 로컬 스코프라 레포마다 개별 실행)
 
-> ⛔ **DB에 직접 붙는 MCP 커넥터는 연결하지 않는다.**
-> DB 이관은 사람이 수행하기로 했고, MCP는 Claude에게 DB 직접 접근을 주는 유일한 경로다.
-> 개인 PC 카탈로그(`claude-code-setup.md` §3·§6)에 AWS MFA + MySQL MCP 설정 가이드가
-> 링크돼 있으나 **회사 PC에서는 설치 대상이 아니다.**
+### DB 직결 MCP — 읽기 전용 계정으로만
+
+레거시 스키마 파악에는 DB 직결 MCP가 유용하다. 다만 **AI에게 주는 계정은 읽기 전용이어야
+한다.** DB 이관·스키마 변경은 사람이 수행하기로 했고, MCP는 Claude에게 DB 직접 접근을 주는
+유일한 경로이기 때문이다. 계정 권한이 곧 경계선이다.
+
+- 전용 계정을 따로 판다. 애플리케이션 계정이나 관리자 계정을 재사용하지 않는다.
+- 권한은 **`SELECT`만.** 쓰기·DDL·권한 부여는 주지 않는다.
+- **가능하면 읽기 전용 복제본(replica)에 붙인다.** 읽기 전용 계정이라도 무거운 조회는
+  프로덕션에 부하를 준다. 권한과 부하는 별개 문제다.
+- 연결 정보는 환경변수·시크릿 매니저로 주입한다. MCP 설정 파일에 평문으로 넣지 않는다.
+
+**연결 후 실제로 읽기 전용인지 확인한다.** "읽기 전용으로 만들어달라고 요청했다"와
+"실제로 쓰기가 막혀 있다"는 다르다. 쓰기를 한 번 시도해 거부되는지 직접 확인한다.
+
+> 참고: 개인 PC 카탈로그(`claude-code-setup.md` §3·§6)에 AWS MFA + MySQL MCP 설정
+> 가이드가 있다. 접속 절차는 그대로 쓰되 **계정만 읽기 전용으로 교체**한다.
 
 ---
 
@@ -468,7 +481,7 @@ Claude Code 세션에서:
 | `taste-skill`, vercel 9종, `web-design-guidelines` | FE 디자인 계열 — 백엔드 포지션에서 사용처 없음 |
 | `caveman` | 제외(2026-08-19). 응답 문체 압축은 회사 PC에서 불필요 |
 | Serena MCP | 제외(2026-08-19). LSP 코드 인텔리전스 — 회사 PC 셋업에서 제외 |
-| DB 직결 MCP 커넥터 | 제외. Claude에게 DB 직접 접근을 주는 경로라 "DB 이관은 사람이 수행" 원칙과 충돌한다 |
+| DB 직결 MCP의 쓰기 권한 | 제외. 커넥터 자체는 쓰되 **읽기 전용 계정으로만** 붙인다(Step 10 참조) |
 
 ## 갱신 규칙
 개인 PC에서 플러그인·스킬을 추가/제거하면 `guide/ai/claude-code-setup.md`(카탈로그)를 먼저
