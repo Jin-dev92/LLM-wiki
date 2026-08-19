@@ -25,6 +25,10 @@ NestJS + PostgreSQL(레거시 Express + MySQL 마이그레이션).
 - Claude Code 사용 **가능** / 감사 훅은 **개인 판단으로 설치** / 회사용 워크스페이스 사용으로 개인 레포 유출 리스크 해소 / MCP는 허용 예상
 - 입사 후 확인 2건: **외부 네트워크 아웃바운드**(막히면 `last30days` 제외), **회사 Claude 계정 발급 요청**
 
+**작업 경계 (2026-08-19 사용자 확인):** **DB 이관은 AI를 쓰지 않고 사람이 직접 수행한다.**
+스키마·데이터 이전, 컷오버, 시퀀스 보정은 사람 작업이다. AI는 이관 *이후*의 애플리케이션
+코드와, 이관 시 무엇이 깨지는지 판단하는 데 쓰는 문서(`rules/stacks/postgres.md`)까지만 맡는다.
+
 **보류(입사 후 결정):** ORM(Prisma vs TypeORM) — 회사 선택 확인 후 룰 확정. 그전까지 TypeORM 룰은 쓰지 않는다.
 
 ---
@@ -119,7 +123,7 @@ NestJS + PostgreSQL(레거시 Express + MySQL 마이그레이션).
 
 - [ ] ADR-0005 ORM 선택(Prisma vs TypeORM) — 확정 후 `rules/stacks/`에 반영
 - [ ] ADR-0006 전환 전략(스트랭글러 단위·컷오버 기준)
-- [ ] ADR-0007 MySQL→PostgreSQL 데이터 이전 방식·롤백 기준
+- [ ] ADR-0007 MySQL→PostgreSQL 데이터 이전 방식·롤백 기준 (**실행은 사람이 한다** — ADR은 결정 기록용)
 - [ ] 실측 결과를 `rules/stacks/postgres.md`·`notes/strangler-fig-migration.md`에 역류 (`provenance: inferred` → `extracted` 승격)
 
 ---
