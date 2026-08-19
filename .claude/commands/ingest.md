@@ -8,7 +8,8 @@ argument-hint: "<url | 파일경로 | 유튜브링크>  (없으면 대화/메모
 CLAUDE.md의 COMPILE 단계를 그대로 수행한다.
 
 1. **소스 판별 & 읽기**
-   - youtube.com / youtu.be → `watch` 스킬로 내용 추출 (ingested_via: youtube)
+   - youtube.com / youtu.be → `yt-dlp --write-auto-sub --skip-download` 로 자막을 받아 읽는다 (ingested_via: youtube)
+     자막이 없으면 사용자에게 알리고 진행 여부를 묻는다.
    - http(s) URL → WebFetch (ingested_via: web)
    - 로컬 경로(.pdf/.md/.txt/이미지) → Read (ingested_via: pdf)
    - 인자 없음/붙여넣은 텍스트 → 대화 내용을 소스로 (ingested_via: memo)

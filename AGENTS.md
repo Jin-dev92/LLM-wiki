@@ -17,7 +17,7 @@
 - `notes/`는 `provenance: extracted|inferred|ambiguous` 추가 — 출처 추출/LLM 추론/모호 구분.
 
 ## COMPILE 단계 (소스 → 위키)
-1. **소스 읽기**: 유튜브=watch 스킬, 웹=WebFetch, 로컬=Read, 메모=대화 내용.
+1. **소스 읽기**: 유튜브=`yt-dlp` 자막 추출, 웹=WebFetch, 로컬=Read, 메모=대화 내용.
 2. **연관성 검색(계층)**: 먼저 `index.md`와 각 노트의 제목/태그/summary를 훑어 후보를
    좁힌 뒤, 필요한 노트만 본문을 연다. (위키가 커져도 컨텍스트 비용 평탄)
 3. **원천 기록**: `sources/`에 source 노트 생성(summary + url/author/ingested_via).
