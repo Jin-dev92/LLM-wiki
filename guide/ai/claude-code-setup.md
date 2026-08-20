@@ -1,9 +1,9 @@
 ---
 type: project
 title: Claude Code 환경 셋업 (스킬·플러그인 온보딩)
-summary: 다른 환경에서 현재 Claude Code 환경을 재현하기 위한 온보딩 체크리스트 — 플러그인 4개, gstack 스킬 스위트, MCP 커넥터, mattpocock/vercel 스킬 팩, Playwright 공식 MCP, 트러블슈팅, 설치 명령.
+summary: 다른 환경에서 현재 Claude Code 환경을 재현하기 위한 온보딩 체크리스트 — 플러그인 3개(버전 고정 없이 latest), gstack 스킬 스위트, standalone 스킬 5종, MCP 커넥터, mattpocock/vercel 스킬 팩, Playwright 공식 MCP, 트러블슈팅, 설치 명령.
 created: 2026-06-18
-updated: 2026-07-06
+updated: 2026-08-19
 visibility: private
 status: active
 tags: [meta, claude-code, onboarding, setup, sync]
@@ -19,32 +19,31 @@ tags: [meta, claude-code, onboarding, setup, sync]
 ---
 
 ## 1. 플러그인 (마켓플레이스 경유)
-현재 user 스코프로 설치된 플러그인 4개. (출처: `~/.claude/plugins/installed_plugins.json`, `known_marketplaces.json`)
+현재 user 스코프로 설치된 플러그인 3개. (출처: `~/.claude/plugins/installed_plugins.json`, `known_marketplaces.json`)
+
+**버전은 고정하지 않는다 — 항상 latest로 설치·유지한다.** (gstack과 동일 정책. 버전 문자열을 박아두면 금방 stale해진다)
 
 | 플러그인 | 마켓플레이스 | GitHub repo | 버전 |
 |---|---|---|---|
-| `codex` | openai-codex | `openai/codex-plugin-cc` | 1.0.4 |
-| `superpowers` | superpowers-marketplace | `obra/superpowers-marketplace` | 5.1.0 |
-| `claude-md-management` | claude-plugins-official | `anthropics/claude-plugins-official` | 1.0.0 |
-| `watch` | claude-video | `bradautomates/claude-video` | 0.1.3 |
+| `superpowers` | superpowers-marketplace | `obra/superpowers-marketplace` | latest |
+| `claude-md-management` | claude-plugins-official | `anthropics/claude-plugins-official` | latest |
+| `humanize-korean` | im-not-ai | `epoko77-ai/im-not-ai` | latest |
 
 **설치** (Claude Code 안에서 슬래시 명령):
 ```text
-/plugin marketplace add openai/codex-plugin-cc
 /plugin marketplace add obra/superpowers-marketplace
 /plugin marketplace add anthropics/claude-plugins-official
-/plugin marketplace add bradautomates/claude-video
+/plugin marketplace add epoko77-ai/im-not-ai
 
-/plugin install codex@openai-codex
 /plugin install superpowers@superpowers-marketplace
 /plugin install claude-md-management@claude-plugins-official
-/plugin install watch@claude-video
+/plugin install humanize-korean@im-not-ai
 ```
 
+- 현재 설치 버전 확인: `cat ~/.claude/plugins/installed_plugins.json`
 - `superpowers`는 공식 마켓플레이스로도 설치 가능: `/plugin install superpowers@claude-plugins-official` (현재 설치본은 community = `obra/...`).
-- `watch`는 영상 자막/Whisper 처리에 `GROQ_API_KEY`(권장) 또는 `OPENAI_API_KEY`가
-  `~/.config/watch/.env`에 필요하다.
-- `codex`는 로컬 Codex CLI가 있어야 일부 기능이 동작한다(`/codex:setup`으로 확인).
+- **제거된 플러그인**: `watch@claude-video`(유튜브 자막 → yt-dlp로 대체, 2026-08-19), `codex@openai-codex`(gstack의 `codex` 스킬로 대체). 마켓플레이스 등록이 남아 있으면 `/plugin marketplace remove`로 정리한다.
+- gstack의 `codex` 스킬을 쓰려면 로컬 Codex CLI가 필요하다.
 
 ---
 
@@ -121,7 +120,7 @@ slash 명령 아닌 auto-activate 스킬이라 gstack과 충돌 없음.
 
 ## 5-2. 감사 로깅 훅 (cc-audit-hooks, 2026-06-24)
 Claude Code 프롬프트·도구 호출을 JSONL로 로깅하고 위험 Bash 명령을 PreToolUse에서 차단하는
-자작 훅. **소스 = private repo `Jin-dev92/cc-audit-hooks`**, 라이브 = `~/.claude/hooks/audit/`.
+자작 훅. **소스 = `Jin-dev92/cc-audit-hooks`(public — 2026-08-19 확인)**, 라이브 = `~/.claude/hooks/audit/`.
 표준 라이브러리만, 훅은 세션을 깨지 않음(예외 삼키고 exit 0).
 
 **복원**:
@@ -167,6 +166,28 @@ npx skills@latest add vercel-labs/agent-skills --skill '*' -g -a claude-code -y
 
 ---
 
+## 5-4. git clone standalone 스킬 (2026-08-19 실측 반영)
+`~/.claude/skills/` 아래에 레포를 직접 클론해 쓰는 스킬들. gstack과 형제 디렉터리라
+`/gstack-upgrade`가 건드리지 않는다. **버전 고정 없이 최신 유지**(업데이트는 각 디렉터리에서 `git pull`).
+
+| 스킬 | repo | 용도 | 회사 PC |
+|---|---|---|---|
+| `ponytail` | `DietrichGebert/ponytail` | 과설계 방지(YAGNI·최소 diff 강제) | 설치 |
+| `caveman` | `juliusbrussee/caveman` | 응답 문체 압축 | 제외(개인 PC 전용) |
+| `last30days` | `mvanhorn/last30days-skill` | 최근 30일 여론·리서치 | 설치(⚠️ 매 실행 외부 fetch — Step 0 정책 게이트 확인 대상) |
+| `taste-skill` | `leonxlnx/taste-skill` | FE 디자인 취향 팩 | 제외(백엔드 포지션) |
+| `rtk` | `rtk-ai/rtk` | 셸 출력 필터·압축으로 토큰 60~90% 절감 | 설치(`brew install rtk` — 소스 빌드 불필요. ⚠️ PreToolUse에서 명령을 재작성하므로 감사 훅보다 **뒤에** 배치) |
+
+`rtk`만 Homebrew로 설치하고 나머지는 clone한다.
+
+```sh
+brew install rtk && rtk init -g --no-patch
+git clone --depth 1 https://github.com/DietrichGebert/ponytail.git   ~/.claude/skills/ponytail
+git clone --depth 1 https://github.com/mvanhorn/last30days-skill.git ~/.claude/skills/last30days
+```
+
+---
+
 ## 6. 함께 보관한 참고 가이드 (`guide/` 하위)
 iCloud `claude/guides`에서 가져온 인프라·MCP·워크플로우 설정 가이드(원문 사본).
 - `guide/mcp/serena-mcp-setup-guide.md` — Serena LSP MCP 설치
@@ -206,6 +227,7 @@ iCloud `claude/guides`에서 가져온 인프라·MCP·워크플로우 설정 �
   (Claude에게 "claude code 셋업 문서 동기화해줘"라고 해도 됨.)
 
 ## 의사결정 로그
+- 2026-08-19: **실측 동기화 + 버전 표기 정책 통일.** 문서(4개)와 실제 설치(3개)가 어긋나 있어 재조사. 플러그인 표의 고정 버전 숫자를 전부 `latest`로 바꿨다(gstack에 이미 적용한 2026-07-06 결정을 플러그인에도 확대 — 숫자를 박으면 stale해진다). `watch@claude-video` **제거 확정**(유튜브 자막은 이미 설치된 `yt-dlp`로 대체 → 위키 CLAUDE.md/AGENTS.md/`ingest` 커맨드의 "watch 스킬" 표기도 함께 수정). `codex@openai-codex`는 미설치 상태이며 gstack의 `codex` 스킬로 대체됨. `humanize-korean@im-not-ai` 신규 반영. 문서에 없던 git clone standalone 스킬 5종을 §5-4로 신설하고 회사 PC 설치 여부를 함께 표기.
 - 2026-07-06: `/wiki-review` 점검 결과 반영 — gstack 버전을 특정 숫자로 고정 표기하지 않기로 결정(항상 최신 유지, 확인 명령만 남김). 버전 문자열을 박아두면 금방 stale해진다는 지난 점검 결과 반영.
 - 2026-07-03: **Playwright 공식 MCP(Test MCP server)**를 §5에 범용 추천으로 추가. `estate-web` 실사용(PR #41 도입, PR #43 Generator로 E2E 작성) 결과 E2E 테스트 작성·디버깅에 유용해 검증됨. npm 패키지 설치가 아니라 Playwright 내장 `init-agents` 명령으로 프로젝트별 생성되는 **프로젝트 로컬 스코프**라 §3(계정 MCP)이 아닌 §5(추천 확장 도구)에 기재 — 실제 등록 명령·상세 컨벤션은 각 프로젝트에서 개별 수행.
 - 2026-07-02: **Matt Pocock Skills**(19개, `code-review` 제외)·**Vercel React Best Practices**(vercel-labs/agent-skills 전체 9개) 설치(§5-3). 설치 전 GitHub API로 두 레포 구조를 직접 대조해 이름 충돌 검증 — `code-review`가 Anthropic 공식 마켓플레이스 1st-party 스킬임을 확인하고 제외, `tdd`/`diagnosing-bugs`/`triage`는 이름 충돌 없지만 superpowers·gstack과 기능 겹침 인지. vercel-cli-with-tokens·web-design-guidelines·writing-guidelines는 설치 스크립트 Snyk 스캔에서 Med Risk(토큰 접근/매 실행 외부 fetch) — 사용 시 주의.
@@ -217,7 +239,7 @@ iCloud `claude/guides`에서 가져온 인프라·MCP·워크플로우 설정 �
 - 2026-06-18: 주제별 정리를 위해 `claude-code-setup.md`·`claude-global.md`를 `guide/ai/`로 이동(iCloud `guides/ai` 구조와 일치).
 - 2026-06-20: 추천 확장 도구에 **graphify**(`safishamsi/graphify`) 추가 — 입사 직후 낯선 코드베이스 온보딩용으로 판단. **문서에만 기재, 실제 설치 안 함**(사용자 지시). gbrain과 기능 중복은 도입 시 비교하기로. 4개 skills 레포 분석 결과 graphify가 이 위키 철학과 가장 정렬됨(4개 skills 레포 분석(2026-06-20 대화)).
 - 2026-06-20: `addyosmani/agent-skills` 전체 분석 후 **전환하지 않기로 결정**(→ `docs/decisions/ADR-0001`). gstack+superpowers가 실행 도구 측면에서 상위집합이라 전환은 순손실. 대신 `documentation-and-adrs`·`doubt-driven-development`·`source-driven-development` 3종을 cherry-pick해 글로벌 설치(§5-1).
-- 2026-06-24: 자작 **감사 로깅 훅 cc-audit-hooks** 구축·설치(§5-2). 생각등대 영상 tip 3([[ai-experience-on-resume]]) 실천 — 프롬프트·도구 로깅 + 위험명령 차단. private repo `Jin-dev92/cc-audit-hooks`, brainstorming→writing-plans→subagent-driven으로 TDD 구현(29 tests), opus 전체 리뷰 후 rm 분리플래그 우회·installer 크래시 수정. 라이브 설치 완료(settings.json 백업).
+- 2026-06-24: 자작 **감사 로깅 훅 cc-audit-hooks** 구축·설치(§5-2). 생각등대 영상 tip 3([[ai-experience-on-resume]]) 실천 — 프롬프트·도구 로깅 + 위험명령 차단. `Jin-dev92/cc-audit-hooks`, brainstorming→writing-plans→subagent-driven으로 TDD 구현(29 tests), opus 전체 리뷰 후 rm 분리플래그 우회·installer 크래시 수정. 라이브 설치 완료(settings.json 백업).
 
 ## 삽질/배운 것
 - `~/.claude/skills`의 개별 스킬을 하나하나 설치한 게 아니라 gstack 레포 하나가

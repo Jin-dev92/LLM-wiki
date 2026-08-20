@@ -14,7 +14,7 @@ tags: [meta, claude-code, hooks, audit, logging, security, onboarding, setup]
 JSONL로 남기고, 위험한 Bash 명령을 실행 전 차단하며, 사용 현황을 Markdown 리포트로 뽑는다.
 
 > 동기: 생각등대 "이력서에 AI 이렇게 씀" tip 3 — *"AI 작업을 블랙박스로 두지 말고 prompt·tool 로그로 재현성·추적성을 확보하라"*. 근거 노트 [[ai-experience-on-resume]], [[harness-engineering]].
-> 소스 오브 트루스: **private repo `Jin-dev92/cc-audit-hooks`** (라이브 위치는 `~/.claude/hooks/audit/`).
+> 소스 오브 트루스: **`Jin-dev92/cc-audit-hooks`(public — 2026-08-19 확인)** (라이브 위치는 `~/.claude/hooks/audit/`).
 
 ---
 
@@ -63,5 +63,5 @@ rm -r ~/.claude/hooks/audit
 이미 `~/.claude/settings.json`에는 [[claude-code-setup]] §5-1의 source-driven-development WebFetch 훅이 있다. cc-audit-hooks는 그와 **별도 항목으로 공존**(install.py가 기존 보존). 복원 순서는 무관.
 
 ## 동기화 규칙
-- 원본: private repo `Jin-dev92/cc-audit-hooks`. 라이브: `~/.claude/hooks/audit/`.
+- 원본: `Jin-dev92/cc-audit-hooks`(public). ⚠️ private로 알고 있었으나 2026-08-19 `gh repo view` 결과 public. 공개 상태가 의도와 맞는지 확인할 것. 라이브: `~/.claude/hooks/audit/`.
 - 규칙·코드를 바꾸면 repo에서 수정 후 `python3 install.py` 재실행으로 라이브 갱신.

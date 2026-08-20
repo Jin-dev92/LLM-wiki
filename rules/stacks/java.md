@@ -366,13 +366,13 @@ just spotless-fix     # 자동 수정
 |------|------|------|
 | 파일명 | `YYYYMMDD-NNN-description.yaml` | `20241127-001-add-user-table.yaml` |
 | changeset ID | `YYYYMMDD-NNN` | `20241127-001` |
-| author | GitHub username | `ttc-cbj` |
+| author | GitHub username | `{github-username}` |
 
 ```yaml
 databaseChangeLog:
   - changeSet:
       id: 20241127-001
-      author: ttc-cbj
+      author: {github-username}
       changes:
         - createTable:
             tableName: ttc_example

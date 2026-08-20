@@ -30,7 +30,7 @@
   ```
 
 ## 메모
-- 마지막 동기화: 2026-06-18
+- 마지막 동기화: 2026-08-19
 - 이 폴더의 `*.md` 사본들은 위키 노트(frontmatter 규격)가 아니라 **원문 보관**이다. ingest 대상 아님.
 - iCloud `guides/ai`의 Claude Code 도구 가이드 2개는 sources/에 원문 보관 +
   [[claude-code-setup]]으로 재구성했다.
